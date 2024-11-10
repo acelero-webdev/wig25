@@ -1,14 +1,17 @@
 import type { Metadata } from 'next';
 import { Anybody, Inter } from 'next/font/google';
 import './globals.css';
+import Nav from './Nav';
 
 const inter = Inter({
     subsets: ['latin'],
+    variable: '--font-inter',
     display: 'swap',
 });
 
 const anybody = Anybody({
     subsets: ['latin'],
+    variable: '--font-anybody',
     display: 'swap',
 });
 
@@ -25,8 +28,11 @@ export default function RootLayout({
     return (
         <html lang='en'>
             <body
-                className={`${anybody.className} ${inter.className} antialiased`}>
-                {children}
+                className={`${anybody.variable} ${inter.variable} antialiased bg-secondary`}>
+                <div className='max-w-[1200px] mx-auto h-screen'>
+                    <Nav />
+                    {children}
+                </div>
             </body>
         </html>
     );

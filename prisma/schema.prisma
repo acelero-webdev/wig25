@@ -1,0 +1,176 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Policy {
+  id              Int                  @id @default(autoincrement())
+  type            PolicyType
+  name            String
+  description     String?
+  priority        Priority
+  reasoning       String?
+  status          Status
+  businessScopes  BusinessUnitScopes[]
+  itApplications  ITApplications[]
+  websites        Website[]
+  systems         System[]
+  products        Product[]
+  legalFrameworks LegalFramework[]
+}
+
+enum PolicyType {
+  SECURITY
+  LEGAL
+  BREACH
+  ACCESSIBILITY
+  PRIVACY
+}
+
+enum Priority {
+  HIGH
+  MEDIUM
+  LOW
+}
+
+enum Status {
+  COMPLETE
+  DRAFT
+  TO_BE_DRAFTED
+  TDB
+  ARCHIVE
+}
+
+enum BusinessUnitScopes {
+  ACELERO_INC
+  SHINE_EARLY_LEARNING
+  ACELERO_LEARNING
+  PUBLIC_SYSTEMS
+  RFP
+  LIMITED
+}
+
+enum ITApplications {
+  CREDIT_CARD_PROCESSING
+  ONLINE_SALES
+  WEBSITES
+  CYBERSECURITY_INSURANCE
+  STAFF_CONTRACTOR_AGREEMENTS
+}
+
+enum Website {
+  ACELERO_COM
+  SHINEEARLY_COM
+  ACELEROLEARNING_COM
+  SHINEEARLY_STORE
+  YOUNGSTARCONNECT_COM
+  SPARKPHILLYPREK_COM
+  INDIANASPARK_COM
+  SPARKMONTANA_COM
+  PEER_ACELERO_COM
+}
+
+enum System {
+  WORKDAY
+  GOOGLE
+  NETSUITE
+  CORNERSTONE
+  HUBSPOT
+  AODOCS
+  SHINE_INSIGHT
+  PLAYGROUND
+}
+
+enum Product {
+  SHINEINSIGHT_COM
+  SHINEHELPCONNECT_COM
+  FAMILYAPPLICATION_SHINEINSIGHT_COM
+  MYSPARKLEARNINGLAB
+}
+
+enum LegalFramework {
+  HEADSTART
+  FERPA
+  HIPPA
+}
+
+model User {
+  id            String          @id @default(cuid())
+  name          String?
+  email         String          @unique
+  emailVerified DateTime?
+  image         String?
+  accounts      Account[]
+  sessions      Session[]
+  // Optional for WebAuthn support
+  Authenticator Authenticator[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Account {
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([provider, providerAccountId])
+}
+
+model Session {
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model VerificationToken {
+  identifier String
+  token      String
+  expires    DateTime
+
+  @@id([identifier, token])
+}
+
+// Optional for WebAuthn support
+model Authenticator {
+  credentialID         String  @unique
+  userId               String
+  providerAccountId    String
+  credentialPublicKey  String
+  counter              Int
+  credentialDeviceType String
+  credentialBackedUp   Boolean
+  transports           String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([userId, credentialID])
+}
