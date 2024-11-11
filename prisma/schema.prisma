@@ -17,6 +17,7 @@ generator client {
 model Policy {
   id              Int                  @id @default(autoincrement())
   type            PolicyType
+  link            String?
   name            String
   description     String?
   priority        Priority

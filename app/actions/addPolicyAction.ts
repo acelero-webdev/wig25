@@ -32,7 +32,6 @@ export async function addPolicyAction(data: FormData): Promise<FormState> {
     const validation = policyFormSchema.safeParse(formData);
 
     if (!validation.success) {
-        console.log(validation.error.errors[0].message);
         return {
             message: 'Invalid form data.',
         };
@@ -43,7 +42,6 @@ export async function addPolicyAction(data: FormData): Promise<FormState> {
             data: formData,
         });
     } catch (error: any) {
-        console.log(error.message);
         return {
             message: error.message,
         };

@@ -7,7 +7,8 @@ import SecurityInfoCard from './component/SecurityInfoCard';
 
 import hippaImage from '@/public/images/hippa.jpg';
 import developmentImage from '@/public/images/development.png';
-import PolicyTable from './component/PolicyTable';
+import { Button } from '@/components/ui/button';
+import Link from 'next/link';
 
 export default function PoliciesPage() {
     return (
@@ -21,6 +22,11 @@ export default function PoliciesPage() {
                     resources and information to help every employee contribute
                     to a secure and resilient work environment.
                 </P>
+                <Link href='/policies/view'>
+                    <Button className='bg-accent font-sans hover:bg-white hover:text-accent'>
+                        View All Policies
+                    </Button>
+                </Link>
             </section>
             <section className='space-y-8'>
                 <H2 className='text-2xl md:text-3xl text-accent text-center'>
@@ -76,10 +82,6 @@ export default function PoliciesPage() {
                         link='/policies/hippa'
                     />
                 </div>
-            </section>
-
-            <section className='w-full'>
-                <PolicyTable />
             </section>
         </main>
     );
