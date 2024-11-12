@@ -15,7 +15,6 @@ import React from 'react';
 
 export default function PolicyDropdownMenu({ policy }: { policy: Policy }) {
     const { toast } = useToast();
-    console.log(policy);
 
     return (
         <DropdownMenu>

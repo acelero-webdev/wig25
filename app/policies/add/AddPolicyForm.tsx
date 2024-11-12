@@ -14,11 +14,11 @@ import {
 } from '@/components/ui/form';
 import {
     Select,
-    SelectTrigger,
-    SelectValue,
     SelectContent,
     SelectItem,
-} from '@radix-ui/react-select';
+    SelectTrigger,
+    SelectValue,
+} from '@/components/ui/select';
 import { Input } from '@/components/ui/input';
 
 import MultiSelectInput from '@/components/MultiSelectInput';
@@ -27,8 +27,11 @@ import { P } from '@/components/typography/p';
 import { Button } from '@/components/ui/button';
 import { policyFormSchema } from '@/lib/schemas/PolicySchema';
 import { addPolicyAction } from '@/app/actions/addPolicyAction';
+import { useToast } from '@/hooks/use-toast';
 
 export default function AddPolicyForm() {
+    const toast = useToast();
+
     // 1. Define your form.
     const form = useForm<z.infer<typeof policyFormSchema>>({
         resolver: zodResolver(policyFormSchema),
@@ -62,6 +65,11 @@ export default function AddPolicyForm() {
         );
 
         const response = await addPolicyAction(formData);
+
+        form.reset();
+        toast.toast({
+            title: 'Policy added successfully',
+        });
 
         // USE RESPONSE IN UI OR REDIRECT
         return response;

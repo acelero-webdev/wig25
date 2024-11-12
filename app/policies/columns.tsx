@@ -39,12 +39,17 @@ export const columns: ColumnDef<Policy>[] = [
                 </Button>
             );
         },
-        cell: ({ row }) => {
-            return (
-                <div className='hidden sm:table-cell text-center'>
-                    {properCase(row.getValue('type'))}
-                </div>
-            );
+        cell: (props) => (
+            <div className='hidden sm:table-cell text-center'>
+                {properCase(props.getValue() as string)}
+            </div>
+        ),
+        enableColumnFilter: true,
+        filterFn: (row, columnId, typeFilters) => {
+            if (typeFilters.length === 0) return true;
+
+            const type = row.getValue(columnId);
+            return typeFilters.includes(type);
         },
     },
     {
@@ -65,6 +70,12 @@ export const columns: ColumnDef<Policy>[] = [
         header: () => <div className='font-bold'>Priority</div>,
         cell: ({ row }) => {
             return <PolicyPriority priority={row.getValue('priority')} />;
+        },
+        filterFn: (row, columnId, typeFilters) => {
+            if (typeFilters.length === 0) return true;
+
+            const type = row.getValue(columnId);
+            return typeFilters.includes(type);
         },
     },
     {

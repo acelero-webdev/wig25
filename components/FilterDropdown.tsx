@@ -1,7 +1,6 @@
 'use client';
 
 import * as React from 'react';
-import { DropdownMenuCheckboxItemProps } from '@radix-ui/react-dropdown-menu';
 
 import {
     DropdownMenu,
@@ -13,22 +12,37 @@ import {
 } from '@/components/ui/dropdown-menu';
 import MenuButton from './MenuButton';
 import { LucideIcon, PlusCircle } from 'lucide-react';
-
-type Checked = DropdownMenuCheckboxItemProps['checked'];
+import { ColumnFiltersState } from '@tanstack/react-table';
+import { useState } from 'react';
+import { properCase } from '@/lib/utils';
 
 interface FilterDropdownProps {
     title: string;
+    options: string[];
+    tableColumnId: string;
+    setColumnFilters: React.Dispatch<React.SetStateAction<ColumnFiltersState>>;
     CustomIcon?: LucideIcon;
 }
 
 export default function FilterDropdown({
     title,
     CustomIcon,
+    tableColumnId,
+    options,
+    setColumnFilters,
 }: FilterDropdownProps) {
-    const [showStatusBar, setShowStatusBar] = React.useState<Checked>(true);
-    const [showActivityBar, setShowActivityBar] =
-        React.useState<Checked>(false);
-    const [showPanel, setShowPanel] = React.useState<Checked>(false);
+    const initialState = options.map((option) => ({
+        checked: false,
+        value: option,
+    }));
+    const [optionsState, setOptionsState] = useState(initialState);
+
+    const onOptionChecked = (checked: boolean, value: string) => {
+        setOptionsState([
+            { checked: !checked, value: value },
+            ...optionsState.filter((option) => option.value !== value),
+        ]);
+    };
 
     return (
         <DropdownMenu>
@@ -40,22 +54,46 @@ export default function FilterDropdown({
             <DropdownMenuContent className='w-56'>
                 <DropdownMenuLabel>Appearance</DropdownMenuLabel>
                 <DropdownMenuSeparator />
-                <DropdownMenuCheckboxItem
-                    checked={showStatusBar}
-                    onCheckedChange={setShowStatusBar}>
-                    Status Bar
-                </DropdownMenuCheckboxItem>
-                <DropdownMenuCheckboxItem
-                    checked={showActivityBar}
-                    onCheckedChange={setShowActivityBar}
-                    disabled>
-                    Activity Bar
-                </DropdownMenuCheckboxItem>
-                <DropdownMenuCheckboxItem
-                    checked={showPanel}
-                    onCheckedChange={setShowPanel}>
-                    Panel
-                </DropdownMenuCheckboxItem>
+                {optionsState.map(({ checked, value }) => (
+                    <DropdownMenuCheckboxItem
+                        key={value}
+                        checked={checked}
+                        onCheckedChange={() => {
+                            onOptionChecked(checked, value);
+
+                            setColumnFilters((prev) => {
+                                const targetedFilter = prev.find(
+                                    (filter) => filter.id === tableColumnId
+                                );
+
+                                if (!targetedFilter || !targetedFilter?.value) {
+                                    return prev.concat({
+                                        id: tableColumnId,
+                                        value: [value],
+                                    });
+                                }
+
+                                return prev.map((filter) =>
+                                    filter.id === tableColumnId
+                                        ? {
+                                              ...filter,
+                                              value: checked
+                                                  ? targetedFilter?.value.filter(
+                                                        (targetedValue) =>
+                                                            targetedValue !==
+                                                            value
+                                                    )
+                                                  : targetedFilter?.value.concat(
+                                                        value
+                                                    ),
+                                          }
+                                        : filter
+                                );
+                            });
+                        }}>
+                        {properCase(value)}
+                    </DropdownMenuCheckboxItem>
+                ))}
             </DropdownMenuContent>
         </DropdownMenu>
     );

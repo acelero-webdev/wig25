@@ -66,6 +66,8 @@ export function DataTable<TData, TValue>({
         getPaginationRowModel: getPaginationRowModel(),
     });
 
+    console.log(columnFilters);
+
     return (
         <div className='rounded-md space-y-8'>
             <div className='w-full flex flex-col-reverse sm:flex-row gap-4'>
@@ -83,8 +85,24 @@ export function DataTable<TData, TValue>({
                     }
                 />
                 <div className='flex gap-3'>
-                    <FilterDropdown title='Type' />
-                    <FilterDropdown title='Priority' />
+                    <FilterDropdown
+                        title='Type'
+                        tableColumnId='type'
+                        options={[
+                            'SECURITY',
+                            'LEGAL',
+                            'BREACH',
+                            'ACCESSIBILITY',
+                            'PRIVACY',
+                        ]}
+                        setColumnFilters={setColumnFilters}
+                    />
+                    <FilterDropdown
+                        title='Priority'
+                        tableColumnId='priority'
+                        options={['HIGH', 'MEDIUM', 'LOW']}
+                        setColumnFilters={setColumnFilters}
+                    />
                     <DropdownMenu>
                         <DropdownMenuTrigger asChild>
                             <MenuButton
