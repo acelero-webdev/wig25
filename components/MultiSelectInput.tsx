@@ -4,6 +4,8 @@ import { Label } from '@radix-ui/react-label';
 import React, { useEffect, useState } from 'react';
 import { Controller, UseFormReturn } from 'react-hook-form';
 import Select from 'react-select';
+import { policyFormSchema } from '@/lib/schemas/PolicySchema';
+import { z } from 'zod';
 
 interface Option {
     value: string;
@@ -11,7 +13,7 @@ interface Option {
 }
 
 interface MultiSelectInputProps {
-    form: UseFormReturn<any>;
+    form: UseFormReturn<z.infer<typeof policyFormSchema>>;
     fieldName: string;
     options: Option[];
     label: string;
