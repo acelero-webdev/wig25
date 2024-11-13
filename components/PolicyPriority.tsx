@@ -13,7 +13,7 @@ export default function PolicyPriority({ priority }: { priority: Priority }) {
         return (
             <div className='flex items-center gap-2'>
                 <div className='w-4 h-4 rounded-full bg-yellow-400'></div>
-                High
+                Medium
             </div>
         );
     } else {

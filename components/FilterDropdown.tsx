@@ -66,12 +66,18 @@ export default function FilterDropdown({
                                     (filter) => filter.id === tableColumnId
                                 ) || { id: 'unknown', value: [] };
 
-                                if (!targetedFilter || !targetedFilter?.value) {
+                                if (
+                                    !targetedFilter ||
+                                    !targetedFilter?.value ||
+                                    targetedFilter.id === 'unknown'
+                                ) {
                                     return prev.concat({
                                         id: tableColumnId,
                                         value: [value],
                                     });
                                 }
+
+                                console.log(targetedFilter);
 
                                 return prev.map((filter) =>
                                     filter.id === tableColumnId
