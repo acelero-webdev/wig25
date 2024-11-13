@@ -14,7 +14,7 @@ interface Option {
 
 interface MultiSelectInputProps {
     form: UseFormReturn<z.infer<typeof policyFormSchema>>;
-    fieldName: string;
+    fieldName: keyof z.infer<typeof policyFormSchema>;
     options: Option[];
     label: string;
     required?: boolean;
@@ -54,9 +54,7 @@ export default function MultiSelectInput({
                         options={options}
                         isMulti={true}
                         onBlur={onBlur}
-                        value={options.filter(
-                            (c) => value && value.includes(c.value)
-                        )}
+                        value={options.filter((c) => value === c.value)}
                         onChange={(val) => onChange(val.map((c) => c.value))}
                         name={name}
                         ref={ref}
