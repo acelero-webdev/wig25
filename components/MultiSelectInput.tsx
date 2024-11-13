@@ -38,7 +38,7 @@ export default function MultiSelectInput({
         <Controller
             control={form.control}
             name={fieldName}
-            render={({ field: { onChange, onBlur, value, name, ref } }) => (
+            render={({ field: { onChange, onBlur, name, ref } }) => (
                 <>
                     <Label className='font-sans text-sm'>
                         {label}
@@ -54,7 +54,6 @@ export default function MultiSelectInput({
                         options={options}
                         isMulti={true}
                         onBlur={onBlur}
-                        value={options.filter((c) => value === c.value)}
                         onChange={(val) => onChange(val.map((c) => c.value))}
                         name={name}
                         ref={ref}
