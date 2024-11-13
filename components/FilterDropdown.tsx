@@ -15,7 +15,6 @@ import { LucideIcon, PlusCircle } from 'lucide-react';
 import { ColumnFilter, ColumnFiltersState } from '@tanstack/react-table';
 import { useState } from 'react';
 import { properCase } from '@/lib/utils';
-import { unknown } from 'zod';
 
 interface FilterDropdownProps {
     title: string;
