@@ -12,9 +12,10 @@ import {
 } from '@/components/ui/dropdown-menu';
 import MenuButton from './MenuButton';
 import { LucideIcon, PlusCircle } from 'lucide-react';
-import { ColumnFiltersState } from '@tanstack/react-table';
+import { ColumnFilter, ColumnFiltersState } from '@tanstack/react-table';
 import { useState } from 'react';
 import { properCase } from '@/lib/utils';
+import { unknown } from 'zod';
 
 interface FilterDropdownProps {
     title: string;
@@ -62,9 +63,9 @@ export default function FilterDropdown({
                             onOptionChecked(checked, value);
 
                             setColumnFilters((prev) => {
-                                const targetedFilter = prev.find(
+                                const targetedFilter: ColumnFilter = prev.find(
                                     (filter) => filter.id === tableColumnId
-                                );
+                                ) || { id: 'unknown', value: [] };
 
                                 if (!targetedFilter || !targetedFilter?.value) {
                                     return prev.concat({
@@ -79,7 +80,9 @@ export default function FilterDropdown({
                                               ...filter,
                                               value: checked
                                                   ? targetedFilter?.value.filter(
-                                                        (targetedValue) =>
+                                                        (
+                                                            targetedValue: unknown
+                                                        ) =>
                                                             targetedValue !==
                                                             value
                                                     )
