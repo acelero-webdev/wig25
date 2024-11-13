@@ -8,13 +8,16 @@ export type FormState = {
 };
 
 export async function addPolicyAction(data: FormData): Promise<FormState> {
-    let formData: Policy = {
-        type: data.get('type')?.toString()!,
-        name: data.get('name')?.toString()!,
-        description: data.get('description')?.toString()!,
-        priority: data.get('priority')?.toString()!,
-        reasoning: data.get('reasoning')?.toString()!,
-        status: data.get('status')?.toString()!,
+    const formData: Policy = {
+        //data.get('type')?.toString() ||
+        type: 'ACCESSIBILITY',
+        name: data.get('name')?.toString() ?? '',
+        description: data.get('description')?.toString() || '',
+        //data.get('priority')?.toString() ||
+        priority: 'HIGH',
+        reasoning: data.get('reasoning')?.toString() || '',
+        // data.get('status')?.toString() ||
+        status: 'ARCHIVE',
         businessScopes: JSON.parse(
             data.get('businessScopes')?.toString() || ''
         ),
@@ -27,6 +30,8 @@ export async function addPolicyAction(data: FormData): Promise<FormState> {
         legalFrameworks: JSON.parse(
             data.get('legalFrameworks')?.toString() || ''
         ),
+        id: 1,
+        link: '',
     };
 
     const validation = policyFormSchema.safeParse(formData);
@@ -37,15 +42,15 @@ export async function addPolicyAction(data: FormData): Promise<FormState> {
         };
     }
 
-    try {
-        await db.policy.create({
-            data: formData,
-        });
-    } catch (error: any) {
-        return {
-            message: error.message,
-        };
-    }
+    // try {
+    await db.policy.create({
+        data: formData,
+    });
+    // } catch (error: Error) {
+    //     return {
+    //         message: error.message,
+    //     };
+    // }
 
     return {
         message: 'Policy Added.',
