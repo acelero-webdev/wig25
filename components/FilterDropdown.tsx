@@ -77,17 +77,23 @@ export default function FilterDropdown({
                                     filter.id === tableColumnId
                                         ? {
                                               ...filter,
-                                              value: checked
-                                                  ? targetedFilter?.value.filter(
-                                                        (
-                                                            targetedValue: unknown
-                                                        ) =>
-                                                            targetedValue !==
+                                              value:
+                                                  Array.isArray(
+                                                      targetedFilter?.value
+                                                  ) && checked
+                                                      ? targetedFilter?.value.filter(
+                                                            (
+                                                                targetedValue: unknown
+                                                            ) =>
+                                                                targetedValue !==
+                                                                value
+                                                        )
+                                                      : Array.isArray(
+                                                            targetedFilter?.value
+                                                        ) &&
+                                                        targetedFilter?.value.concat(
                                                             value
-                                                    )
-                                                  : targetedFilter?.value.concat(
-                                                        value
-                                                    ),
+                                                        ),
                                           }
                                         : filter
                                 );
