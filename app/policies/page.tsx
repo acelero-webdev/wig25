@@ -12,7 +12,7 @@ import Link from 'next/link';
 
 export default function PoliciesPage() {
     return (
-        <main className='flex flex-col gap-10 items-center h-[90%] mb-3 px-4 sm:px-8'>
+        <main className='flex flex-col gap-10 items-center h-[90%] mb-3 px-8 sm:px-8'>
             <section className='flex flex-col items-center gap-4'>
                 <H1 className='text-accent text-3xl mb-0 font-extrabold md:text-5xl'>
                     Security Package

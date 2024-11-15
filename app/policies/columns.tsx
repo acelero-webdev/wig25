@@ -7,6 +7,7 @@ import { Policy } from '@prisma/client';
 import { ColumnDef } from '@tanstack/react-table';
 import { ArrowUpDown } from 'lucide-react';
 import PolicyDropdownMenu from './view/PolicyDropdownMenu';
+import TableCellList from '@/components/TableCellList';
 
 export const columns: ColumnDef<Policy>[] = [
     {
@@ -33,14 +34,14 @@ export const columns: ColumnDef<Policy>[] = [
                     onClick={() =>
                         column.toggleSorting(column.getIsSorted() === 'asc')
                     }
-                    className='hidden sm:flex'>
+                    className='flex'>
                     Type
                     <ArrowUpDown className='ml-2 h-4 w-4' />
                 </Button>
             );
         },
         cell: (props) => (
-            <div className='hidden sm:table-cell text-center'>
+            <div className='text-center'>
                 {properCase(props.getValue() as string)}
             </div>
         ),
@@ -54,15 +55,9 @@ export const columns: ColumnDef<Policy>[] = [
     },
     {
         accessorKey: 'status',
-        header: () => (
-            <div className='font-bold hidden sm:table-cell'>Status</div>
-        ),
+        header: () => <div className='font-bold'>Status</div>,
         cell: ({ row }) => {
-            return (
-                <div className='hidden sm:table-cell'>
-                    {properCase(row.getValue('status'))}
-                </div>
-            );
+            return <div className=''>{properCase(row.getValue('status'))}</div>;
         },
     },
     {
@@ -81,16 +76,73 @@ export const columns: ColumnDef<Policy>[] = [
     {
         accessorKey: 'description',
         header: () => (
-            <div className='font-bold hidden sm:table-cell max-w-[250px]'>
-                Description
-            </div>
+            <div className='font-bold max-w-[250px]'>Description</div>
         ),
         cell: ({ row }) => {
             return (
-                <div className='hidden sm:table-cell max-w-[250px]'>
-                    {row.getValue('description')}
+                <div className='max-w-[250px]'>
+                    {row.getValue('description') || '-'}
                 </div>
             );
+        },
+    },
+    {
+        accessorKey: 'reasoning',
+        header: () => <div className='font-bold max-w-[250px]'>Reasoning</div>,
+        cell: ({ row }) => {
+            return (
+                <div className='max-w-[250px]'>
+                    {row.getValue('reasoning') || '-'}
+                </div>
+            );
+        },
+    },
+    {
+        accessorKey: 'businessUnits',
+        header: () => (
+            <div className='font-bold max-w-[250px]'>Business Units</div>
+        ),
+        cell: ({ row }) => {
+            return <TableCellList data={row.original.businessScopes} />;
+        },
+    },
+    {
+        accessorKey: 'itApplications',
+        header: () => (
+            <div className='font-bold max-w-[250px]'>IT Applications</div>
+        ),
+        cell: ({ row }) => {
+            return <TableCellList data={row.original.itApplications} />;
+        },
+    },
+    {
+        accessorKey: 'websites',
+        header: () => <div className='font-bold max-w-[250px]'>Websites</div>,
+        cell: ({ row }) => {
+            return <TableCellList data={row.original.websites} />;
+        },
+    },
+    {
+        accessorKey: 'systems',
+        header: () => <div className='font-bold max-w-[250px]'>Systems</div>,
+        cell: ({ row }) => {
+            return <TableCellList data={row.original.systems} />;
+        },
+    },
+    {
+        accessorKey: 'products',
+        header: () => <div className='font-bold max-w-[250px]'>Products</div>,
+        cell: ({ row }) => {
+            return <TableCellList data={row.original.products} />;
+        },
+    },
+    {
+        accessorKey: 'legalFrameworks',
+        header: () => (
+            <div className='font-bold max-w-[250px]'>Legal Frameworks</div>
+        ),
+        cell: ({ row }) => {
+            return <TableCellList data={row.original.legalFrameworks} />;
         },
     },
     {

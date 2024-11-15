@@ -22,7 +22,7 @@ import {
     TableRow,
 } from '@/components/ui/table';
 import MenuButton from '@/components/MenuButton';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Input } from '@/components/ui/input';
 import FilterDropdown from '@/components/FilterDropdown';
 
@@ -32,22 +32,101 @@ import {
     DropdownMenuContent,
     DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { Settings2 } from 'lucide-react';
+import { PlusCircle, Settings2 } from 'lucide-react';
+import Link from 'next/link';
+import { Button } from '@/components/ui/button';
+import { searchEnumArray } from '@/lib/utils';
+import { Policy } from '@prisma/client';
 
 interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[];
     data: TData[];
 }
 
-export function DataTable<TData, TValue>({
+export function DataTable<TData extends Policy, TValue>({
     columns,
     data,
 }: DataTableProps<TData, TValue>) {
     const [sorting, setSorting] = React.useState<SortingState>([]);
     const [columnFilters, setColumnFilters] =
         React.useState<ColumnFiltersState>([]);
+    const [globalFilter, setGlobalFilter] = React.useState<string>('');
     const [columnVisibility, setColumnVisibility] =
-        React.useState<VisibilityState>({ description: false });
+        React.useState<VisibilityState>({
+            name: false,
+            actions: false,
+            description: false,
+            type: false,
+            status: false,
+            priority: false,
+            reasoning: false,
+            businessUnits: false,
+            itApplications: false,
+            websites: false,
+            systems: false,
+            products: false,
+            legalFrameworks: false,
+        });
+
+    useEffect(() => {
+        setColumnVisibility(
+            window.innerWidth < 400
+                ? {
+                      description: false,
+                      type: false,
+                      status: false,
+                      priority: false,
+                      reasoning: false,
+                      businessUnits: false,
+                      itApplications: false,
+                      websites: false,
+                      systems: false,
+                      products: false,
+                      legalFrameworks: false,
+                  }
+                : window.innerWidth < 600
+                ? {
+                      priority: true,
+                      description: false,
+                      type: false,
+                      status: false,
+                      reasoning: false,
+                      businessUnits: false,
+                      itApplications: false,
+                      websites: false,
+                      systems: false,
+                      products: false,
+                      legalFrameworks: false,
+                  }
+                : window.innerWidth < 768
+                ? {
+                      status: true,
+                      priority: true,
+                      description: false,
+                      type: false,
+                      reasoning: false,
+                      businessUnits: false,
+                      itApplications: false,
+                      websites: false,
+                      systems: false,
+                      products: false,
+                      legalFrameworks: false,
+                  }
+                : {
+                      description: false,
+                      type: true,
+                      status: true,
+                      priority: true,
+                      reasoning: false,
+                      businessUnits: false,
+                      itApplications: false,
+                      websites: false,
+                      systems: false,
+                      products: false,
+                      legalFrameworks: false,
+                  }
+        );
+    }, []);
 
     const table = useReactTable({
         data,
@@ -62,8 +141,34 @@ export function DataTable<TData, TValue>({
             sorting,
             columnFilters,
             columnVisibility,
+            globalFilter,
         },
         getPaginationRowModel: getPaginationRowModel(),
+        onGlobalFilterChange: setGlobalFilter,
+        globalFilterFn: (row, columnId, filterValue) => {
+            const policyRow = row.original;
+            const name: string = row.getValue('name');
+            const type: string = row.getValue('type');
+            const status: string = row.getValue('status');
+            const priority: string = row.getValue('priority');
+            const description: string = row.getValue('description');
+            const reasoning: string = row.getValue('reasoning');
+
+            return (
+                searchEnumArray(policyRow.businessScopes, filterValue) ||
+                searchEnumArray(policyRow.itApplications, filterValue) ||
+                searchEnumArray(policyRow.legalFrameworks, filterValue) ||
+                searchEnumArray(policyRow.websites, filterValue) ||
+                searchEnumArray(policyRow.systems, filterValue) ||
+                searchEnumArray(policyRow.products, filterValue) ||
+                name.toLowerCase().includes(filterValue.toLowerCase()) ||
+                type.toLowerCase().includes(filterValue.toLowerCase()) ||
+                status.toLowerCase().includes(filterValue.toLowerCase()) ||
+                priority.toLowerCase().includes(filterValue.toLowerCase()) ||
+                description.toLowerCase().includes(filterValue.toLowerCase()) ||
+                reasoning.toLowerCase().includes(filterValue.toLowerCase())
+            );
+        },
     });
 
     return (
@@ -71,18 +176,11 @@ export function DataTable<TData, TValue>({
             <div className='w-full flex flex-col-reverse sm:flex-row gap-4'>
                 <Input
                     className='bg-white text-black font-sans w-full sm:w-1/3 placeholder:text-neutral-400'
-                    placeholder='search policies...'
-                    value={
-                        (table.getColumn('name')?.getFilterValue() as string) ??
-                        ''
-                    }
-                    onChange={(event) =>
-                        table
-                            .getColumn('name')
-                            ?.setFilterValue(event.target.value)
-                    }
+                    placeholder='global policy search'
+                    value={globalFilter}
+                    onChange={(e) => setGlobalFilter(e.target.value)}
                 />
-                <div className='flex gap-3'>
+                <div className='flex gap-3 w-full flex-wrap'>
                     <FilterDropdown
                         title='Type'
                         tableColumnId='type'
@@ -101,15 +199,16 @@ export function DataTable<TData, TValue>({
                         options={['HIGH', 'MEDIUM', 'LOW']}
                         setColumnFilters={setColumnFilters}
                     />
+
                     <DropdownMenu>
                         <DropdownMenuTrigger asChild>
                             <MenuButton
-                                className='ml-auto bg-white text-black'
+                                className='bg-white text-black text-[10px] sm:text-sm'
                                 CustomIcon={Settings2}>
                                 Columns
                             </MenuButton>
                         </DropdownMenuTrigger>
-                        <DropdownMenuContent align='end'>
+                        <DropdownMenuContent>
                             {table
                                 .getAllColumns()
                                 .filter((column) => column.getCanHide())
@@ -128,10 +227,17 @@ export function DataTable<TData, TValue>({
                                 })}
                         </DropdownMenuContent>
                     </DropdownMenu>
+                    <div className='sm:self-end sm:ml-auto'>
+                        <Link href='/policies/add'>
+                            <Button className='bg-accent text-[10px] sm:text-sm font-sans'>
+                                <PlusCircle /> New Policy
+                            </Button>
+                        </Link>
+                    </div>
                 </div>
             </div>
 
-            <Table className='bg-white text-black rounded-xl'>
+            <Table className='bg-white text-black rounded-xl font-sans'>
                 <TableHeader>
                     {table.getHeaderGroups().map((headerGroup) => (
                         <TableRow key={headerGroup.id}>

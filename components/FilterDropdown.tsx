@@ -60,7 +60,6 @@ export default function FilterDropdown({
                         checked={checked}
                         onCheckedChange={() => {
                             onOptionChecked(checked, value);
-
                             setColumnFilters((prev) => {
                                 const targetedFilter: ColumnFilter = prev.find(
                                     (filter) => filter.id === tableColumnId

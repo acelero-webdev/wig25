@@ -42,3 +42,11 @@ export function upperFirstChar(value: string) {
 
     return `${firstChar.toUpperCase()}${rest.toLowerCase()}`;
 }
+
+export function searchEnumArray(values: string[], search: string) {
+    const result = values
+        .map((scope) => properCase(scope).toLowerCase())
+        .find((scope) => scope.includes(search.toLowerCase()));
+
+    return result ? true : false;
+}

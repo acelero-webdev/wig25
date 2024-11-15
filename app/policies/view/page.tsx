@@ -9,7 +9,7 @@ export default async function ViewPoliciesPage() {
     const policies = await db.policy.findMany();
 
     return (
-        <main className='space-y-6 px-3'>
+        <main className='space-y-6 px-8'>
             <div className='text-center space-y-6 flex flex-col'>
                 <div className='text-left'>
                     <H2 className='text-2xl md:text-3xl text-accent'>

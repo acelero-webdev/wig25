@@ -17,8 +17,8 @@ const MenuButton: React.FC<MenuButtonProps> = ({
         <Button
             className='bg-white text-black text-xs rounded-md p-2 font-sans hover:bg-accent hover:text-white'
             {...props}>
-            {CustomIcon && <CustomIcon />}
-            <span>{children}</span>
+            {CustomIcon && <CustomIcon className='w-6 h-6 sm:w-8 sm:h-8' />}
+            <p className='text-[10px] sm:text-sm font-sans'>{children}</p>
         </Button>
     );
 };
