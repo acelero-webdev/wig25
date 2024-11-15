@@ -77,8 +77,6 @@ export default function FilterDropdown({
                                     });
                                 }
 
-                                console.log(targetedFilter);
-
                                 return prev.map((filter) =>
                                     filter.id === tableColumnId
                                         ? {

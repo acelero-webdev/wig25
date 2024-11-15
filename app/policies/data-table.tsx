@@ -66,8 +66,6 @@ export function DataTable<TData, TValue>({
         getPaginationRowModel: getPaginationRowModel(),
     });
 
-    console.log(columnFilters);
-
     return (
         <div className='rounded-md space-y-8'>
             <div className='w-full flex flex-col-reverse sm:flex-row gap-4'>
