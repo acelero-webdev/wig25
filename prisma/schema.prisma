@@ -49,11 +49,12 @@ enum Status {
   COMPLETE
   DRAFT
   TO_BE_DRAFTED
-  TDB
+  TBD
   ARCHIVE
 }
 
 enum BusinessUnitScopes {
+  NOT_AVAILABLE
   ACELERO_INC
   SHINE_EARLY_LEARNING
   ACELERO_LEARNING
@@ -63,6 +64,7 @@ enum BusinessUnitScopes {
 }
 
 enum ITApplications {
+  NOT_AVAILABLE
   CREDIT_CARD_PROCESSING
   ONLINE_SALES
   WEBSITES
@@ -71,6 +73,7 @@ enum ITApplications {
 }
 
 enum Website {
+  NOT_AVAILABLE
   ACELERO_COM
   SHINEEARLY_COM
   ACELEROLEARNING_COM
@@ -83,6 +86,7 @@ enum Website {
 }
 
 enum System {
+  NOT_AVAILABLE
   WORKDAY
   GOOGLE
   NETSUITE
@@ -94,6 +98,7 @@ enum System {
 }
 
 enum Product {
+  NOT_AVAILABLE
   SHINEINSIGHT_COM
   SHINEHELPCONNECT_COM
   FAMILYAPPLICATION_SHINEINSIGHT_COM
@@ -101,6 +106,7 @@ enum Product {
 }
 
 enum LegalFramework {
+  NOT_AVAILABLE
   HEADSTART
   FERPA
   HIPPA

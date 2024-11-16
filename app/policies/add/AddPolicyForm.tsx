@@ -294,6 +294,10 @@ export default function AddPolicyForm() {
                             form={form}
                             options={[
                                 {
+                                    value: 'NOT_AVAILABLE',
+                                    label: 'N/A',
+                                },
+                                {
                                     value: 'ACELERO_INC',
                                     label: 'Acelero, Inc.',
                                 },
@@ -331,6 +335,10 @@ export default function AddPolicyForm() {
                             form={form}
                             options={[
                                 {
+                                    value: 'NOT_AVAILABLE',
+                                    label: 'N/A',
+                                },
+                                {
                                     value: 'CREDIT_CARD_PROCESSING',
                                     label: 'Credit Card Processing',
                                 },
@@ -363,6 +371,10 @@ export default function AddPolicyForm() {
                         <MultiSelectInput
                             form={form}
                             options={[
+                                {
+                                    value: 'NOT_AVAILABLE',
+                                    label: 'N/A',
+                                },
                                 {
                                     value: 'ACELERO_COM',
                                     label: 'acelero.com',
@@ -413,6 +425,10 @@ export default function AddPolicyForm() {
                             form={form}
                             options={[
                                 {
+                                    value: 'NOT_AVAILABLE',
+                                    label: 'N/A',
+                                },
+                                {
                                     value: 'WORKDAY',
                                     label: 'Workday',
                                 },
@@ -458,6 +474,10 @@ export default function AddPolicyForm() {
                             form={form}
                             options={[
                                 {
+                                    value: 'NOT_AVAILABLE',
+                                    label: 'N/A',
+                                },
+                                {
                                     value: 'SHINEINSIGHT_COM',
                                     label: 'Shine Insight',
                                 },
@@ -486,6 +506,10 @@ export default function AddPolicyForm() {
                         <MultiSelectInput
                             form={form}
                             options={[
+                                {
+                                    value: 'NOT_AVAILABLE',
+                                    label: 'N/A',
+                                },
                                 {
                                     value: 'HEADSTART',
                                     label: 'Head Start',

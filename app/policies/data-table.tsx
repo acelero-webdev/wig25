@@ -229,7 +229,7 @@ export function DataTable<TData extends Policy, TValue>({
                     </DropdownMenu>
                     <div className='sm:self-end sm:ml-auto'>
                         <Link href='/policies/add'>
-                            <Button className='bg-accent text-[10px] sm:text-sm font-sans'>
+                            <Button className='bg-accent text-[10px] sm:text-sm font-sans hover:bg-white hover:text-accent'>
                                 <PlusCircle /> New Policy
                             </Button>
                         </Link>

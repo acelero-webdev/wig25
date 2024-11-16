@@ -14,11 +14,12 @@ const PolicyStatusEnum = z.enum([
     'COMPLETE',
     'DRAFT',
     'TO_BE_DRAFTED',
-    'TDB',
+    'TBD',
     'ARCHIVE',
 ]);
 
 const BusinessUnitScopesEnum = z.enum([
+    'NOT_AVAILABLE',
     'ACELERO_INC',
     'SHINE_EARLY_LEARNING',
     'ACELERO_LEARNING',
@@ -28,6 +29,7 @@ const BusinessUnitScopesEnum = z.enum([
 ]);
 
 const ITApplicationsEnum = z.enum([
+    'NOT_AVAILABLE',
     'CREDIT_CARD_PROCESSING',
     'ONLINE_SALES',
     'WEBSITES',
@@ -36,6 +38,7 @@ const ITApplicationsEnum = z.enum([
 ]);
 
 const WebsitesEnum = z.enum([
+    'NOT_AVAILABLE',
     'ACELERO_COM',
     'SHINEEARLY_COM',
     'ACELEROLEARNING_COM',
@@ -48,6 +51,7 @@ const WebsitesEnum = z.enum([
 ]);
 
 const SystemsEnum = z.enum([
+    'NOT_AVAILABLE',
     'WORKDAY',
     'GOOGLE',
     'NETSUITE',
@@ -59,13 +63,19 @@ const SystemsEnum = z.enum([
 ]);
 
 const ProductsEnum = z.enum([
+    'NOT_AVAILABLE',
     'SHINEINSIGHT_COM',
     'SHINEHELPCONNECT_COM',
     'FAMILYAPPLICATION_SHINEINSIGHT_COM',
     'MYSPARKLEARNINGLAB',
 ]);
 
-const LegalFrameworksEnum = z.enum(['HEADSTART', 'FERPA', 'HIPPA']);
+const LegalFrameworksEnum = z.enum([
+    'NOT_AVAILABLE',
+    'HEADSTART',
+    'FERPA',
+    'HIPPA',
+]);
 
 export const policyFormSchema = z.object({
     type: PolicyTypeEnum,

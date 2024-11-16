@@ -5,7 +5,7 @@ export default function PolicyPriority({ priority }: { priority: Priority }) {
     if (priority === 'LOW') {
         return (
             <div className='flex items-center gap-2'>
-                <div className='w-4 h-4 rounded-full bg-red-600'></div>
+                <div className='w-4 h-4 rounded-full bg-green-500'></div>
                 Low
             </div>
         );
@@ -19,7 +19,7 @@ export default function PolicyPriority({ priority }: { priority: Priority }) {
     } else {
         return (
             <div className='flex items-center gap-2'>
-                <div className='w-4 h-4 rounded-full bg-green-500'></div>
+                <div className='w-4 h-4 rounded-full bg-red-600'></div>
                 High
             </div>
         );
