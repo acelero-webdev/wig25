@@ -179,7 +179,7 @@ export function DataTable<TData extends Policy, TValue>({
                             setColumnVisibility(
                                 getColumnVisibility(window.innerWidth)
                             );
-                            router.push('/policies/view');
+                            router.replace('/policies/view');
                         }}>
                         <CircleX />
                         Clear

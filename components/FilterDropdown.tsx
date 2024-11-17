@@ -13,8 +13,9 @@ import {
 import MenuButton from './MenuButton';
 import { LucideIcon, PlusCircle } from 'lucide-react';
 import { ColumnFilter, ColumnFiltersState } from '@tanstack/react-table';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { properCase } from '@/lib/utils/utils';
+import { init } from 'next/dist/compiled/webpack/webpack';
 
 interface FilterDropdownProps {
     title: string;
@@ -35,16 +36,18 @@ export default function FilterDropdown({
 }: FilterDropdownProps) {
     const initialState = options.map((option) => {
         // @ts-expect-error - columnFilters is of type unknown but we know it will be a string[]
-        const defaultFilterValues: serverHookstring[] = columnFilters.find(
+        const defaultFilterValues: string[] = columnFilters.find(
             (filter) => filter.id === tableColumnId
         )?.value;
-        const checked =
-            defaultFilterValues && defaultFilterValues.includes(option);
+        const checked = defaultFilterValues
+            ? defaultFilterValues.includes(option)
+            : false;
         return {
             checked: checked,
             value: option,
         };
     });
+
     const [optionsState, setOptionsState] = useState(initialState);
 
     const onOptionChecked = (checked: boolean, value: string) => {
@@ -53,6 +56,10 @@ export default function FilterDropdown({
             ...optionsState.filter((option) => option.value !== value),
         ]);
     };
+
+    useEffect(() => {
+        setOptionsState(initialState);
+    }, [columnFilters]);
 
     return (
         <DropdownMenu>
