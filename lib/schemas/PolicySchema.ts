@@ -74,7 +74,7 @@ const LegalFrameworksEnum = z.enum([
     'NOT_AVAILABLE',
     'HEADSTART',
     'FERPA',
-    'HIPPA',
+    'HIPAA',
 ]);
 
 export const policyFormSchema = z.object({

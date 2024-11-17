@@ -18,6 +18,7 @@ interface MultiSelectInputProps {
     options: Option[];
     label: string;
     required?: boolean;
+    defaultValue?: Option[];
 }
 
 export default function MultiSelectInput({
@@ -26,6 +27,7 @@ export default function MultiSelectInput({
     options,
     label,
     required,
+    defaultValue,
 }: MultiSelectInputProps) {
     const id = Date.now().toString();
     const [isMounted, setIsMounted] = useState(false);
@@ -49,6 +51,7 @@ export default function MultiSelectInput({
                         )}
                     </Label>
                     <Select
+                        defaultValue={defaultValue}
                         id={id}
                         className='mt-2'
                         options={options}

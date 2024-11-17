@@ -7,7 +7,10 @@ export type FormState = {
     message: string;
 };
 
-export async function addPolicyAction(data: FormData): Promise<FormState> {
+export async function editPolicyAction(
+    data: FormData,
+    policyId: number
+): Promise<FormState> {
     const formData: Policy = {
         // @ts-expect-error - type is forced in select input.
         type: data.get('type')?.toString(),
@@ -42,7 +45,10 @@ export async function addPolicyAction(data: FormData): Promise<FormState> {
     }
 
     // try {
-    await db.policy.create({
+    await db.policy.update({
+        where: {
+            id: policyId,
+        },
         data: formData,
     });
     // } catch (error: Error) {
@@ -52,6 +58,6 @@ export async function addPolicyAction(data: FormData): Promise<FormState> {
     // }
 
     return {
-        message: 'Policy Added.',
+        message: 'Policy updated successfully.',
     };
 }

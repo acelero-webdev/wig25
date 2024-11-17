@@ -68,6 +68,8 @@ export function DataTable<TData extends Policy, TValue>({
             legalFrameworks: false,
         });
 
+    console.log(columnFilters);
+
     useEffect(() => {
         setColumnVisibility(
             window.innerWidth < 400

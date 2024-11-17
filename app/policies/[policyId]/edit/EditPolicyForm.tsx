@@ -26,19 +26,20 @@ import { H2 } from '@/components/typography/h2';
 import { P } from '@/components/typography/p';
 import { Button } from '@/components/ui/button';
 import { policyFormSchema } from '@/lib/schemas/PolicySchema';
-import { addPolicyAction } from '@/app/actions/addPolicyAction';
 import { useToast } from '@/hooks/use-toast';
+import { Policy } from '@prisma/client';
 import {
     businessScopeOptions,
     itApplicationOptions,
-    legalFrameworkOptions,
-    productOptions,
-    systemOptions,
     websiteOptions,
-} from '../options';
+    systemOptions,
+    productOptions,
+    legalFrameworkOptions,
+} from '../../options';
+import { editPolicyAction } from '@/app/actions/editPolicyAction';
 import { useRouter } from 'next/navigation';
 
-export default function AddPolicyForm() {
+export default function EditPolicyForm({ policy }: { policy: Policy }) {
     const toast = useToast();
     const router = useRouter();
 
@@ -46,9 +47,18 @@ export default function AddPolicyForm() {
     const form = useForm<z.infer<typeof policyFormSchema>>({
         resolver: zodResolver(policyFormSchema),
         defaultValues: {
-            name: '',
-            description: '',
-            reasoning: '',
+            name: policy.name,
+            reasoning: policy.reasoning || '',
+            description: policy.description || '',
+            type: policy.type,
+            priority: policy.priority,
+            status: policy.status,
+            businessScopes: policy.businessScopes,
+            itApplications: policy.itApplications,
+            websites: policy.websites,
+            systems: policy.systems,
+            products: policy.products,
+            legalFrameworks: policy.legalFrameworks,
         },
     });
 
@@ -74,7 +84,7 @@ export default function AddPolicyForm() {
             JSON.stringify(data.legalFrameworks)
         );
 
-        const response = await addPolicyAction(formData);
+        const response = await editPolicyAction(formData, policy.id);
 
         form.reset();
         toast.toast({
@@ -170,7 +180,7 @@ export default function AddPolicyForm() {
 
                                 <Select
                                     onValueChange={field.onChange}
-                                    defaultValue={field.value}
+                                    defaultValue={policy.type}
                                     {...field}>
                                     <SelectTrigger>
                                         <SelectValue
@@ -215,7 +225,7 @@ export default function AddPolicyForm() {
 
                                 <Select
                                     onValueChange={field.onChange}
-                                    defaultValue={field.value}
+                                    defaultValue={policy.priority}
                                     {...field}>
                                     <SelectTrigger>
                                         <SelectValue
@@ -265,7 +275,7 @@ export default function AddPolicyForm() {
 
                                 <Select
                                     onValueChange={field.onChange}
-                                    defaultValue={field.value}
+                                    defaultValue={policy.status}
                                     {...field}>
                                     <SelectTrigger>
                                         <SelectValue
@@ -303,6 +313,12 @@ export default function AddPolicyForm() {
                     <div className='col-span-12 sm:col-span-6 lg:col-span-4'>
                         <MultiSelectInput
                             form={form}
+                            defaultValue={policy.businessScopes.map(
+                                (scope) =>
+                                    businessScopeOptions.find(
+                                        (option) => option.value === scope
+                                    ) || { value: 'unknown', label: 'unknown' }
+                            )}
                             options={businessScopeOptions}
                             fieldName='businessScopes'
                             label='Business Scopes'
@@ -315,6 +331,13 @@ export default function AddPolicyForm() {
                     <div className='col-span-12 sm:col-span-6 lg:col-span-4'>
                         <MultiSelectInput
                             form={form}
+                            defaultValue={policy.itApplications.map(
+                                (itApplication) =>
+                                    itApplicationOptions.find(
+                                        (option) =>
+                                            option.value === itApplication
+                                    ) || { value: 'unknown', label: 'unknown' }
+                            )}
                             options={itApplicationOptions}
                             fieldName='itApplications'
                             label='IT Applications'
@@ -327,6 +350,12 @@ export default function AddPolicyForm() {
                     <div className='col-span-12 sm:col-span-6 lg:col-span-4'>
                         <MultiSelectInput
                             form={form}
+                            defaultValue={policy.websites.map(
+                                (website) =>
+                                    websiteOptions.find(
+                                        (option) => option.value === website
+                                    ) || { value: 'unknown', label: 'unknown' }
+                            )}
                             options={websiteOptions}
                             fieldName='websites'
                             label='Websites'
@@ -339,6 +368,12 @@ export default function AddPolicyForm() {
                     <div className='col-span-12 sm:col-span-6 lg:col-span-4'>
                         <MultiSelectInput
                             form={form}
+                            defaultValue={policy.systems.map(
+                                (system) =>
+                                    systemOptions.find(
+                                        (option) => option.value === system
+                                    ) || { value: 'unknown', label: 'unknown' }
+                            )}
                             options={systemOptions}
                             fieldName='systems'
                             label='Systems'
@@ -351,6 +386,12 @@ export default function AddPolicyForm() {
                     <div className='col-span-12 sm:col-span-6 lg:col-span-4'>
                         <MultiSelectInput
                             form={form}
+                            defaultValue={policy.products.map(
+                                (product) =>
+                                    productOptions.find(
+                                        (option) => option.value === product
+                                    ) || { value: 'unknown', label: 'unknown' }
+                            )}
                             options={productOptions}
                             fieldName='products'
                             label='Products'
@@ -363,6 +404,13 @@ export default function AddPolicyForm() {
                     <div className='col-span-12 sm:col-span-6 lg:col-span-4'>
                         <MultiSelectInput
                             form={form}
+                            defaultValue={policy.legalFrameworks.map(
+                                (legalFramework) =>
+                                    legalFrameworkOptions.find(
+                                        (option) =>
+                                            option.value === legalFramework
+                                    ) || { value: 'unknown', label: 'unknown' }
+                            )}
                             options={legalFrameworkOptions}
                             fieldName='legalFrameworks'
                             label='Legal Frameworks'

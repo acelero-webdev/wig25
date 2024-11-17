@@ -8,7 +8,7 @@ import {
     DropdownMenuItem,
     DropdownMenuTrigger,
 } from '@radix-ui/react-dropdown-menu';
-import { MoreHorizontal, Link2, Pencil } from 'lucide-react';
+import { MoreHorizontal, Link2, Pencil, Eye } from 'lucide-react';
 import Link from 'next/link';
 import { useToast } from '@/hooks/use-toast';
 import React from 'react';
@@ -49,6 +49,14 @@ export default function PolicyDropdownMenu({ policy }: { policy: Policy }) {
                         className='flex items-center gap-2'>
                         <Pencil width={16} />
                         Edit Policy
+                    </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem className='hover:text-bold hover:cursor-pointer outline-none'>
+                    <Link
+                        href={`/policies/${policy.id}/view`}
+                        className='flex items-center gap-2'>
+                        <Eye width={16} />
+                        View Policy
                     </Link>
                 </DropdownMenuItem>
             </DropdownMenuContent>
