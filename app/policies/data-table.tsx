@@ -32,102 +32,42 @@ import {
     DropdownMenuContent,
     DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { PlusCircle, Settings2 } from 'lucide-react';
+import { CircleX, PlusCircle, Settings2 } from 'lucide-react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { searchEnumArray } from '@/lib/utils';
+import { searchEnumArray } from '@/lib/utils/utils';
 import { Policy } from '@prisma/client';
+import {
+    defaultVisibility,
+    getColumnVisibility,
+} from '../../lib/utils/column-visibility';
+import { useRouter } from 'next/navigation';
 
 interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[];
     data: TData[];
+    defaultColumnFilterState?: ColumnFiltersState;
+    defaultSearchState?: string;
 }
 
 export function DataTable<TData extends Policy, TValue>({
     columns,
     data,
+    defaultColumnFilterState,
+    defaultSearchState,
 }: DataTableProps<TData, TValue>) {
     const [sorting, setSorting] = React.useState<SortingState>([]);
     const [columnFilters, setColumnFilters] =
-        React.useState<ColumnFiltersState>([]);
-    const [globalFilter, setGlobalFilter] = React.useState<string>('');
+        React.useState<ColumnFiltersState>(defaultColumnFilterState || []);
+    const [globalFilter, setGlobalFilter] = React.useState<string>(
+        defaultSearchState || ''
+    );
     const [columnVisibility, setColumnVisibility] =
-        React.useState<VisibilityState>({
-            name: false,
-            actions: false,
-            description: false,
-            type: false,
-            status: false,
-            priority: false,
-            reasoning: false,
-            businessUnits: false,
-            itApplications: false,
-            websites: false,
-            systems: false,
-            products: false,
-            legalFrameworks: false,
-        });
-
-    console.log(columnFilters);
+        React.useState<VisibilityState>(defaultVisibility);
+    const router = useRouter();
 
     useEffect(() => {
-        setColumnVisibility(
-            window.innerWidth < 400
-                ? {
-                      description: false,
-                      type: false,
-                      status: false,
-                      priority: false,
-                      reasoning: false,
-                      businessUnits: false,
-                      itApplications: false,
-                      websites: false,
-                      systems: false,
-                      products: false,
-                      legalFrameworks: false,
-                  }
-                : window.innerWidth < 600
-                ? {
-                      priority: true,
-                      description: false,
-                      type: false,
-                      status: false,
-                      reasoning: false,
-                      businessUnits: false,
-                      itApplications: false,
-                      websites: false,
-                      systems: false,
-                      products: false,
-                      legalFrameworks: false,
-                  }
-                : window.innerWidth < 768
-                ? {
-                      status: true,
-                      priority: true,
-                      description: false,
-                      type: false,
-                      reasoning: false,
-                      businessUnits: false,
-                      itApplications: false,
-                      websites: false,
-                      systems: false,
-                      products: false,
-                      legalFrameworks: false,
-                  }
-                : {
-                      description: false,
-                      type: true,
-                      status: true,
-                      priority: true,
-                      reasoning: false,
-                      businessUnits: false,
-                      itApplications: false,
-                      websites: false,
-                      systems: false,
-                      products: false,
-                      legalFrameworks: false,
-                  }
-        );
+        setColumnVisibility(getColumnVisibility(window.innerWidth));
     }, []);
 
     const table = useReactTable({
@@ -193,12 +133,14 @@ export function DataTable<TData extends Policy, TValue>({
                             'ACCESSIBILITY',
                             'PRIVACY',
                         ]}
+                        columnFilters={columnFilters}
                         setColumnFilters={setColumnFilters}
                     />
                     <FilterDropdown
                         title='Priority'
                         tableColumnId='priority'
                         options={['HIGH', 'MEDIUM', 'LOW']}
+                        columnFilters={columnFilters}
                         setColumnFilters={setColumnFilters}
                     />
 
@@ -229,6 +171,19 @@ export function DataTable<TData extends Policy, TValue>({
                                 })}
                         </DropdownMenuContent>
                     </DropdownMenu>
+                    <Button
+                        className='font-sans bg-destructive text-white hover:bg-white hover:text-destructive'
+                        onClick={() => {
+                            setColumnFilters([]);
+                            setGlobalFilter('');
+                            setColumnVisibility(
+                                getColumnVisibility(window.innerWidth)
+                            );
+                            router.push('/policies/view');
+                        }}>
+                        <CircleX />
+                        Clear
+                    </Button>
                     <div className='sm:self-end sm:ml-auto'>
                         <Link href='/policies/add'>
                             <Button className='bg-accent text-[10px] sm:text-sm font-sans hover:bg-white hover:text-accent'>

@@ -35,7 +35,7 @@ import {
     productOptions,
     systemOptions,
     websiteOptions,
-} from '../options';
+} from '../../../lib/utils/options';
 import { useRouter } from 'next/navigation';
 
 export default function AddPolicyForm() {

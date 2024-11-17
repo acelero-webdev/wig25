@@ -7,6 +7,7 @@ import SecurityInfoCard from './component/SecurityInfoCard';
 
 import hippaImage from '@/public/images/hippa.jpg';
 import developmentImage from '@/public/images/development.png';
+import publicSystemsImage from '@/public/images/public-systems.png';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 
@@ -39,7 +40,11 @@ export default function PoliciesPage() {
                         description='HIPAA (Health Insurance Portability and Accountability Act) is a US law that protects the privacy and security of patients health information.'
                         image={hippaImage}
                         imageAlt='HIPPA logo'
-                        link='/policies/hippa'
+                        link='/policies/view'
+                        query={{
+                            search: 'HIPAA',
+                            priority: ['High'],
+                        }}
                     />
                     <SecurityInfoCard
                         className='col-span-12 sm:col-span-6 lg:col-span-4'
@@ -47,15 +52,28 @@ export default function PoliciesPage() {
                         description={`By working together and adhering to security best practices, we can ensure that our websites and web applications are secure and protected from threats.`}
                         image={developmentImage}
                         imageAlt='An image of all things related to web development'
-                        link='/policies/dev'
+                        link='/policies/view'
+                        query={{
+                            search: 'Web',
+                            type: ['Accessibility', 'Privacy'],
+                        }}
                     />
                     <SecurityInfoCard
                         className='col-span-12 sm:col-span-6 lg:col-span-4'
-                        title='HIPPA'
-                        description='HIPAA (Health Insurance Portability and Accountability Act) is a US law that protects the privacy and security of patients health information.'
-                        image={hippaImage}
-                        imageAlt='HIPPA logo'
-                        link='/policies/hippa'
+                        title='Public Systems'
+                        description='Quickly view our high prioirty public system policies. These policies safeguard vital public services.'
+                        image={publicSystemsImage}
+                        imageAlt='Spark Logo'
+                        link='/policies/view'
+                        query={{
+                            priority: ['HIGH'],
+                            businessUnits: [
+                                'PUBLIC_SYSTEMS',
+                                'SHINE_EARLY_LEARNING',
+                            ],
+                        }}
+                        height='110px'
+                        objectPosition='bottom'
                     />
                     <SecurityInfoCard
                         className='col-span-12 sm:col-span-6 lg:col-span-4'

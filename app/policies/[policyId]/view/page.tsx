@@ -1,6 +1,8 @@
 import { db } from '@/prisma/db';
 import React from 'react';
 
+export const dynamic = 'force-dynamic';
+
 export default async function ViewPolicyPage({
     params,
 }: {
@@ -16,7 +18,7 @@ export default async function ViewPolicyPage({
             },
         });
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    } catch (_) {
+    } catch (error) {
         throw new Error(
             'There was an issue fetching this policy from the database.'
         );

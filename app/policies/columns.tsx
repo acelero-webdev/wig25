@@ -2,7 +2,7 @@
 
 import PolicyPriority from '@/components/PolicyPriority';
 import { Button } from '@/components/ui/button';
-import { properCase } from '@/lib/utils';
+import { properCase } from '@/lib/utils/utils';
 import { Policy } from '@prisma/client';
 import { ColumnDef } from '@tanstack/react-table';
 import { ArrowUpDown } from 'lucide-react';
@@ -66,6 +66,7 @@ export const columns: ColumnDef<Policy>[] = [
         cell: ({ row }) => {
             return <PolicyPriority priority={row.getValue('priority')} />;
         },
+        enableColumnFilter: true,
         filterFn: (row, columnId, typeFilters) => {
             if (typeFilters.length === 0) return true;
 
@@ -105,6 +106,16 @@ export const columns: ColumnDef<Policy>[] = [
         cell: ({ row }) => {
             return <TableCellList data={row.original.businessScopes} />;
         },
+        enableColumnFilter: true,
+        filterFn: (row, columnId, typeFilters) => {
+            if (typeFilters.length === 0) return true;
+            const businessUnits: string[] = row.original.businessScopes;
+
+            return typeFilters.some(
+                (filterValue: string) =>
+                    businessUnits && businessUnits.includes(filterValue)
+            );
+        },
     },
     {
         accessorKey: 'itApplications',
@@ -120,6 +131,16 @@ export const columns: ColumnDef<Policy>[] = [
         header: () => <div className='font-bold max-w-[250px]'>Websites</div>,
         cell: ({ row }) => {
             return <TableCellList data={row.original.websites} />;
+        },
+        enableColumnFilter: true,
+        filterFn: (row, columnId, typeFilters) => {
+            if (typeFilters.length === 0) return true;
+            const websites: string[] = row.original.businessScopes;
+
+            return typeFilters.some(
+                (filterValue: string) =>
+                    websites && websites.includes(filterValue)
+            );
         },
     },
     {

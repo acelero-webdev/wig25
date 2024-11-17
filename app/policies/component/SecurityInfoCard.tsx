@@ -10,6 +10,7 @@ import {
 } from '@/components/ui/card';
 import Image, { StaticImageData } from 'next/image';
 import Link from 'next/link';
+import { Query } from '../view/page';
 
 interface SecurityCardInfoProps {
     title: string;
@@ -18,6 +19,9 @@ interface SecurityCardInfoProps {
     imageAlt: string;
     link: string;
     className?: string;
+    query?: Query;
+    height?: string;
+    objectPosition?: string;
 }
 
 export default function SecurityInfoCard({
@@ -27,6 +31,9 @@ export default function SecurityInfoCard({
     imageAlt,
     link,
     className,
+    query,
+    height,
+    objectPosition,
 }: SecurityCardInfoProps) {
     return (
         <Card className={`font-sans max-w-[400px] mx-auto ${className}`}>
@@ -48,17 +55,20 @@ export default function SecurityInfoCard({
                     sizes='100vw'
                     style={{
                         width: '55%',
-                        height: '100px',
+                        height: height || '100px',
                         objectFit: 'cover',
-                        objectPosition: 'top',
+                        objectPosition: objectPosition || 'top',
                     }}
                 />
             </CardContent>
             <CardFooter>
                 <Link
-                    href={link}
+                    href={{
+                        pathname: link,
+                        query,
+                    }}
                     className='text-center text-accent font-bold block w-full'>
-                    Learn More
+                    View Policies
                 </Link>
             </CardFooter>
         </Card>

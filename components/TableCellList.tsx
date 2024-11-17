@@ -1,4 +1,4 @@
-import { properCase } from '@/lib/utils';
+import { properCase } from '@/lib/utils/utils';
 import React from 'react';
 
 export default function TableCellList({ data }: { data: string[] }) {

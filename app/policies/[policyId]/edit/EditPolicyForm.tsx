@@ -35,7 +35,7 @@ import {
     systemOptions,
     productOptions,
     legalFrameworkOptions,
-} from '../../options';
+} from '../../../../lib/utils/options';
 import { editPolicyAction } from '@/app/actions/editPolicyAction';
 import { useRouter } from 'next/navigation';
 

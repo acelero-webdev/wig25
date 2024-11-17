@@ -8,16 +8,23 @@ export default async function EditPolicyPage({
     params: Promise<{ policyId: string }>;
 }) {
     const { policyId } = await params;
-    const policy = await db.policy.findUnique({
-        where: { id: parseInt(policyId) },
-    });
+    let policy;
+
+    try {
+        policy = await db.policy.findUnique({
+            where: {
+                id: parseInt(policyId),
+            },
+        });
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    } catch (error) {
+        throw new Error(
+            'There was an issue fetching this policy from the database.'
+        );
+    }
 
     if (!policy) {
-        return (
-            <p>
-                Sorry, we were unable to find a policy with the ID: {policyId}
-            </p>
-        );
+        throw new Error(`Unable to find a policy with the id: ${policyId}`);
     }
 
     return (
