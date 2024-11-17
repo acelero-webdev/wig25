@@ -42,6 +42,8 @@ import {
     getColumnVisibility,
 } from '../../lib/utils/column-visibility';
 import { useRouter } from 'next/navigation';
+import { businessScopeOptions } from '@/lib/utils/options';
+import FilterChips from './view/FilterChips';
 
 interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[];
@@ -143,6 +145,17 @@ export function DataTable<TData extends Policy, TValue>({
                         columnFilters={columnFilters}
                         setColumnFilters={setColumnFilters}
                     />
+                    <FilterDropdown
+                        title='Business Units'
+                        tableColumnId='businessUnits'
+                        options={businessScopeOptions
+                            .filter(
+                                (option) => option.value !== 'NOT_AVAILABLE'
+                            )
+                            .map((option) => option.value)}
+                        columnFilters={columnFilters}
+                        setColumnFilters={setColumnFilters}
+                    />
 
                     <DropdownMenu>
                         <DropdownMenuTrigger asChild>
@@ -193,6 +206,11 @@ export function DataTable<TData extends Policy, TValue>({
                     </div>
                 </div>
             </div>
+
+            <FilterChips
+                columnFilters={columnFilters}
+                setColumnFilters={setColumnFilters}
+            />
 
             <Table className='bg-white text-black rounded-xl font-sans'>
                 <TableHeader>
