@@ -1,0 +1,2 @@
+-- AlterEnum
+ALTER TYPE "Product" ADD VALUE 'SHINE_ACCESS';
