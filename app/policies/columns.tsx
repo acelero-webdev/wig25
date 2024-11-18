@@ -165,6 +165,16 @@ export const columns: ColumnDef<Policy>[] = [
         cell: ({ row }) => {
             return <TableCellList data={row.original.legalFrameworks} />;
         },
+        enableColumnFilter: true,
+        filterFn: (row, columnId, typeFilters) => {
+            if (typeFilters.length === 0) return true;
+            const legalFrameworks: string[] = row.original.legalFrameworks;
+
+            return typeFilters.some(
+                (filterValue: string) =>
+                    legalFrameworks && legalFrameworks.includes(filterValue)
+            );
+        },
     },
     {
         id: 'actions',

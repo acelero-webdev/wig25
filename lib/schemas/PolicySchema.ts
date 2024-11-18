@@ -68,6 +68,7 @@ const ProductsEnum = z.enum([
     'SHINEHELPCONNECT_COM',
     'FAMILYAPPLICATION_SHINEINSIGHT_COM',
     'MYSPARKLEARNINGLAB',
+    'SHINE_ACCESS',
 ]);
 
 const LegalFrameworksEnum = z.enum([

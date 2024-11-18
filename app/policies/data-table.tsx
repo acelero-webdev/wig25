@@ -160,7 +160,7 @@ export function DataTable<TData extends Policy, TValue>({
                     <DropdownMenu>
                         <DropdownMenuTrigger asChild>
                             <MenuButton
-                                className='bg-white text-black text-[10px] sm:text-sm'
+                                className='bg-white text-black text-[10px] sm:text-sm hover:bg-accent hover:text-white'
                                 CustomIcon={Settings2}>
                                 Columns
                             </MenuButton>

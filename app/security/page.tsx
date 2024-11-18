@@ -8,6 +8,7 @@ import SecurityInfoCard from '../policies/component/SecurityInfoCard';
 import hippaImage from '@/public/images/hippa.jpg';
 import developmentImage from '@/public/images/development.png';
 import publicSystemsImage from '@/public/images/public-systems.png';
+import legalImage from '@/public/images/legal.png';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 
@@ -66,7 +67,7 @@ export default function SecurityPage() {
                         imageAlt='Spark Logo'
                         link='/policies'
                         query={{
-                            priority: ['HIGH'],
+                            priority: ['High', 'Medium'],
                             businessUnits: [
                                 'PUBLIC_SYSTEMS',
                                 'SHINE_EARLY_LEARNING',
@@ -77,14 +78,14 @@ export default function SecurityPage() {
                     />
                     <SecurityInfoCard
                         className='col-span-12 sm:col-span-6 lg:col-span-4'
-                        title='HIPPA'
-                        description='HIPAA (Health Insurance Portability and Accountability Act) is a US law that protects the privacy and security of patients health information.'
-                        image={hippaImage}
-                        imageAlt='HIPPA logo'
+                        title='Legal'
+                        description={`This collaboration bridges the gap between legal and IT, ensuring our technology initiatives are legally sound and our legal frameworks embrace technological advancements.`}
+                        image={legalImage}
+                        imageAlt='Gavel'
                         link='/policies'
                         query={{
-                            search: 'HIPAA',
-                            priority: ['High'],
+                            priority: ['High', 'Medium'],
+                            type: ['Legal'],
                         }}
                     />
                     <SecurityInfoCard
