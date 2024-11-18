@@ -92,7 +92,7 @@ export default function EditPolicyForm({ policy }: { policy: Policy }) {
         });
 
         setTimeout(() => {
-            router.push('/policies/view');
+            router.push('/policies');
         }, 1000);
     }
 
@@ -424,8 +424,9 @@ export default function EditPolicyForm({ policy }: { policy: Policy }) {
 
                 <Button
                     type='submit'
+                    disabled={!form.formState.isDirty}
                     className='col-span-12 mt-10 bg-accent hover:bg-white hover:text-accent hover:border-2 hover:border-accent'>
-                    Submit
+                    Update
                 </Button>
             </form>
         </Form>

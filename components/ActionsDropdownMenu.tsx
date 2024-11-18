@@ -13,7 +13,7 @@ import Link from 'next/link';
 import { useToast } from '@/hooks/use-toast';
 import React from 'react';
 
-export default function PolicyDropdownMenu({ policy }: { policy: Policy }) {
+export default function ActionsDropdownMenu({ policy }: { policy: Policy }) {
     const { toast } = useToast();
 
     return (
@@ -28,7 +28,7 @@ export default function PolicyDropdownMenu({ policy }: { policy: Policy }) {
             </DropdownMenuTrigger>
             <DropdownMenuContent
                 align='start'
-                className='bg-accent text-white p-3 rounded-md space-y-2 font-sans'>
+                className='bg-accent text-white p-3 rounded-md space-y-2 font-sans z-10'>
                 {policy.link && policy.link !== '' && (
                     <DropdownMenuItem
                         onClick={() => {

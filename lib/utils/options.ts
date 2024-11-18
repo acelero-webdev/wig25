@@ -159,6 +159,10 @@ export const productOptions = [
         value: 'MYSPARKLEARNINGLAB',
         label: 'My Spark Learning Lab',
     },
+    {
+        value: 'SHINE_ACCESS',
+        label: 'Shine Access',
+    },
 ];
 
 export const legalFrameworkOptions = [

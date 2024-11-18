@@ -6,7 +6,7 @@ import { properCase } from '@/lib/utils/utils';
 import { Policy } from '@prisma/client';
 import { ColumnDef } from '@tanstack/react-table';
 import { ArrowUpDown } from 'lucide-react';
-import PolicyDropdownMenu from './view/PolicyDropdownMenu';
+import ActionsDropdownMenu from '@/components/ActionsDropdownMenu';
 import TableCellList from '@/components/TableCellList';
 
 export const columns: ColumnDef<Policy>[] = [
@@ -172,7 +172,7 @@ export const columns: ColumnDef<Policy>[] = [
         cell: ({ row }) => {
             const policy = row.original;
 
-            return <PolicyDropdownMenu policy={policy} />;
+            return <ActionsDropdownMenu policy={policy} />;
         },
     },
 ];

@@ -43,7 +43,7 @@ import {
 } from '../../lib/utils/column-visibility';
 import { useRouter } from 'next/navigation';
 import { businessScopeOptions } from '@/lib/utils/options';
-import FilterChips from './view/FilterChips';
+import FilterChips from '@/components/FilterChips';
 
 interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[];
@@ -192,7 +192,7 @@ export function DataTable<TData extends Policy, TValue>({
                             setColumnVisibility(
                                 getColumnVisibility(window.innerWidth)
                             );
-                            router.replace('/policies/view');
+                            router.replace('/policies');
                         }}>
                         <CircleX />
                         Clear
@@ -208,6 +208,8 @@ export function DataTable<TData extends Policy, TValue>({
             </div>
 
             <FilterChips
+                globalFilter={globalFilter}
+                setGlobalFilter={setGlobalFilter}
                 columnFilters={columnFilters}
                 setColumnFilters={setColumnFilters}
             />

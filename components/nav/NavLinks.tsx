@@ -20,10 +20,19 @@ export default function NavLinks() {
                 </Link>
             </div>
             <div className='flex flex-row gap-8 text-accent font-normal text-xl'>
+                <Link href='/security'>
+                    <li
+                        className={`hover:font-bold ${
+                            pathname.startsWith('/security') ? 'font-bold' : ''
+                        }`}>
+                        Security
+                    </li>
+                </Link>
+
                 <Link href='/policies'>
                     <li
                         className={`hover:font-bold ${
-                            pathname === '/policies' ? 'font-bold' : ''
+                            pathname.startsWith('/policies') ? 'font-bold' : ''
                         }`}>
                         Policies
                     </li>
@@ -31,7 +40,9 @@ export default function NavLinks() {
                 <Link href='/scoreboard'>
                     <li
                         className={`hover:font-bold ${
-                            pathname === '/scoreboard' ? ' font-bold' : ''
+                            pathname.startsWith('/scoreboard')
+                                ? ' font-bold'
+                                : ''
                         }`}>
                         Scoreboard
                     </li>

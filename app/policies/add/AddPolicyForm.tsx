@@ -82,7 +82,7 @@ export default function AddPolicyForm() {
         });
 
         setTimeout(() => {
-            router.push('/policies/view');
+            router.push('/policies');
         }, 1000);
     }
 

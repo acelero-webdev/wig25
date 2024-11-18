@@ -1,6 +1,9 @@
 import { db } from '@/prisma/db';
 import React from 'react';
 import EditPolicyForm from './EditPolicyForm';
+import { Button } from '@/components/ui/button';
+import { EyeIcon } from 'lucide-react';
+import Link from 'next/link';
 
 export default async function EditPolicyPage({
     params,
@@ -29,9 +32,17 @@ export default async function EditPolicyPage({
 
     return (
         <main className='bg-white p-8 rounded-xl mx-4'>
-            <h1 className='text-accent text-3xl mb-4 font-extrabold md:text-4xl'>
-                {policy.name}
-            </h1>
+            <div className='flex flex-row justify-between items-start'>
+                <h1 className='text-accent text-3xl mb-4 font-extrabold md:text-4xl'>
+                    {policy.name}
+                </h1>
+                <Link href={`/policies/${policy.id}/view`}>
+                    <Button className='bg-accent text-white hover:bg-accent2 hover:text-white font-sans'>
+                        <EyeIcon />
+                        View
+                    </Button>
+                </Link>
+            </div>
             <EditPolicyForm policy={policy} />
         </main>
     );
