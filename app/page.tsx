@@ -24,6 +24,7 @@ export default function Home() {
                 <Image
                     src={wigPerson}
                     alt='Pink wig figure'
+                    priority={true}
                 />
                 <Image
                     src={wig}

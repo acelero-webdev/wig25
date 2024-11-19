@@ -12,7 +12,7 @@ import Image, { StaticImageData } from 'next/image';
 import Link from 'next/link';
 import { Query } from '../page';
 
-interface SecurityCardInfoProps {
+interface InfoCardProps {
     title: string;
     description: string;
     image: StaticImageData;
@@ -24,7 +24,7 @@ interface SecurityCardInfoProps {
     objectPosition?: string;
 }
 
-export default function SecurityInfoCard({
+export default function InfoCard({
     title,
     description,
     image,
@@ -34,7 +34,7 @@ export default function SecurityInfoCard({
     query,
     height,
     objectPosition,
-}: SecurityCardInfoProps) {
+}: InfoCardProps) {
     return (
         <Card className={`font-sans max-w-[400px] mx-auto ${className}`}>
             <CardHeader>

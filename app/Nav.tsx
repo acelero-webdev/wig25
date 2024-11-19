@@ -1,5 +1,5 @@
 import NavLinks from '@/components/nav/NavLinks';
-import ProfileMenu from '@/components/ProfileMenu';
+import ProfileMenu from '@/components/nav/ProfileMenu';
 import React from 'react';
 
 export default function Nav() {

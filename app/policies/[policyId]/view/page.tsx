@@ -1,7 +1,7 @@
-import InfoChip from '@/components/InfoChip';
-import MultiInfoChip from '@/components/MultiInfoChip';
-import PolicyPriority from '@/components/PolicyPriority';
-import StatusIndicator from '@/components/StatusIndicator';
+import InfoChip from '@/components/table/InfoChip';
+import MultiInfoChip from '@/components/table/MultiInfoChip';
+import PolicyPriority from '@/components/form/PriorityIndicator';
+import StatusIndicator from '@/components/form/StatusIndicator';
 import { Button } from '@/components/ui/button';
 import { properCase } from '@/lib/utils/utils';
 import { db } from '@/prisma/db';

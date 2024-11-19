@@ -10,7 +10,7 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import MenuButton from './MenuButton';
+import MenuButton from '../general/MenuButton';
 import { LucideIcon, PlusCircle } from 'lucide-react';
 import { ColumnFilter, ColumnFiltersState } from '@tanstack/react-table';
 import { useEffect, useState } from 'react';

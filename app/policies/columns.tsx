@@ -1,13 +1,13 @@
 'use client';
 
-import PolicyPriority from '@/components/PolicyPriority';
+import PolicyPriority from '@/components/form/PriorityIndicator';
 import { Button } from '@/components/ui/button';
 import { properCase } from '@/lib/utils/utils';
 import { Policy } from '@prisma/client';
 import { ColumnDef } from '@tanstack/react-table';
 import { ArrowUpDown } from 'lucide-react';
-import ActionsDropdownMenu from '@/components/ActionsDropdownMenu';
-import TableCellList from '@/components/TableCellList';
+import ActionsDropdownMenu from '@/components/table/ActionsDropdownMenu';
+import TableCellList from '@/components/table/TableCellList';
 
 export const columns: ColumnDef<Policy>[] = [
     {

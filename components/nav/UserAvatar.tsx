@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { auth } from '@/auth';
-import { Skeleton } from './ui/skeleton';
+import { Skeleton } from '../ui/skeleton';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 export default async function UserAvatar() {

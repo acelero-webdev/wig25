@@ -1,7 +1,11 @@
 import { Priority } from '@prisma/client';
 import React from 'react';
 
-export default function PolicyPriority({ priority }: { priority: Priority }) {
+export default function PriorityIndicator({
+    priority,
+}: {
+    priority: Priority;
+}) {
     if (priority === 'LOW') {
         return (
             <div className='flex items-center gap-2'>

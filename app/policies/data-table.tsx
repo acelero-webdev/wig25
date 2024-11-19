@@ -21,10 +21,10 @@ import {
     TableHeader,
     TableRow,
 } from '@/components/ui/table';
-import MenuButton from '@/components/MenuButton';
+import MenuButton from '@/components/general/MenuButton';
 import React, { useEffect } from 'react';
 import { Input } from '@/components/ui/input';
-import FilterDropdown from '@/components/FilterDropdown';
+import FilterDropdown from '@/components/table/FilterDropdown';
 
 import {
     DropdownMenu,
@@ -43,7 +43,7 @@ import {
 } from '../../lib/utils/column-visibility';
 import { useRouter } from 'next/navigation';
 import { businessScopeOptions } from '@/lib/utils/options';
-import FilterChips from '@/components/FilterChips';
+import FilterChips from '@/components/table/FilterChips';
 
 interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[];

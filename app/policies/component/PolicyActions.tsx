@@ -10,7 +10,7 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import MenuButton from '@/components/MenuButton';
+import MenuButton from '@/components/general/MenuButton';
 import Link from 'next/link';
 
 export default function PolicyActions() {

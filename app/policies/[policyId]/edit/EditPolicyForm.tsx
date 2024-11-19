@@ -21,7 +21,7 @@ import {
 } from '@/components/ui/select';
 import { Input } from '@/components/ui/input';
 
-import MultiSelectInput from '@/components/MultiSelectInput';
+import MultiSelectInput from '@/components/form/MultiSelectInput';
 import { H2 } from '@/components/typography/h2';
 import { P } from '@/components/typography/p';
 import { Button } from '@/components/ui/button';
