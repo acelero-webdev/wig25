@@ -1,9 +1,15 @@
-import React from 'react';
+import ButtonSkeleton from '@/components/skeletons/ButtonSkeleton';
+import HeadingSkeleton from '@/components/skeletons/HeadingSkeleton';
+import PolicyTableSkeleton from '@/components/skeletons/PolicyTableSkeleton';
 
 export default function EditPolicyLoadingPage() {
     return (
-        <p className='text-lg text-accent'>
-            Fetching your policy from the database.
-        </p>
+        <main className='bg-white p-8 rounded-xl mx-4'>
+            <div className='flex flex-row justify-between items-start'>
+                <HeadingSkeleton />
+                <ButtonSkeleton />
+            </div>
+            <PolicyTableSkeleton />;
+        </main>
     );
 }

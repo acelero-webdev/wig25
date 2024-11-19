@@ -3,7 +3,7 @@ import React from 'react';
 import { H1 } from '@/components/typography/h1';
 import { H2 } from '@/components/typography/h2';
 import { P } from '@/components/typography/p';
-import SecurityInfoCard from '../policies/component/InfoCard';
+import SecurityInfoCard from '../../components/general/InfoCard';
 
 import hippaImage from '@/public/images/hippa.jpg';
 import developmentImage from '@/public/images/development.png';

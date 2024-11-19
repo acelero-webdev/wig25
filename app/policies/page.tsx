@@ -15,6 +15,19 @@ export default async function PoliciesPage({
     const policies = await db.policy.findMany();
     const query = await searchParams;
 
+    const getDefaultFilterState = () => {
+        return Object.keys(query)
+            .filter((queryKey) => queryKey !== 'search')
+            .map((queryKey) => ({
+                id: queryKey,
+                value: Array.isArray(query[queryKey])
+                    ? query[queryKey].map((value) => value.toUpperCase())
+                    : [query[queryKey]].map((value) =>
+                          value ? value.toUpperCase() : undefined
+                      ),
+            }));
+    };
+
     return (
         <main className='space-y-6 px-8'>
             <div className='text-center space-y-6 flex flex-col'>
@@ -31,18 +44,7 @@ export default async function PoliciesPage({
             <DataTable
                 columns={columns}
                 data={policies}
-                defaultColumnFilterState={Object.keys(query)
-                    .filter((queryKey) => queryKey !== 'search')
-                    .map((queryKey) => ({
-                        id: queryKey,
-                        value: Array.isArray(query[queryKey])
-                            ? query[queryKey].map((value) =>
-                                  value.toUpperCase()
-                              )
-                            : [query[queryKey]].map((value) =>
-                                  value ? value.toUpperCase() : undefined
-                              ),
-                    }))}
+                defaultColumnFilterState={getDefaultFilterState()}
                 defaultSearchState={
                     Array.isArray(query.search) ? query.search[0] : query.search
                 }

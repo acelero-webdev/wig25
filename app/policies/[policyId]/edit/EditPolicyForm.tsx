@@ -4,14 +4,7 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import {
-    Form,
-    FormField,
-    FormItem,
-    FormLabel,
-    FormControl,
-    FormMessage,
-} from '@/components/ui/form';
+import { Form } from '@/components/ui/form';
 import {
     Select,
     SelectContent,
@@ -38,6 +31,8 @@ import {
 } from '../../../../lib/utils/options';
 import { editPolicyAction } from '@/app/actions/editPolicyAction';
 import { useRouter } from 'next/navigation';
+import FormGroup from '@/components/form/FormGroup';
+import ControlledFormGroup from '@/components/form/ControlledFormGroup';
 
 export default function EditPolicyForm({ policy }: { policy: Policy }) {
     const toast = useToast();
@@ -113,204 +108,124 @@ export default function EditPolicyForm({ policy }: { policy: Policy }) {
                     <H2 className='text-xl text-accent2 col-span-12'>
                         Policy Info
                     </H2>
-                    <FormField
-                        control={form.control}
-                        name='name'
-                        render={({ field }) => (
-                            <FormItem className='col-span-12 sm:col-span-6 lg:col-span-4'>
-                                <FormLabel>
-                                    Name
-                                    <span className='text-red-600 italic bold ml-1'>
-                                        *
-                                    </span>
-                                </FormLabel>
-                                <FormControl>
-                                    <Input
-                                        placeholder='Policy Name'
-                                        {...field}
-                                    />
-                                </FormControl>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
-                    <FormField
-                        control={form.control}
-                        name='reasoning'
-                        render={({ field }) => (
-                            <FormItem className='col-span-12 sm:col-span-6 lg:col-span-4'>
-                                <FormLabel>Policy Reasoning</FormLabel>
-                                <FormControl>
-                                    <Input
-                                        placeholder='Reasoning'
-                                        {...field}
-                                    />
-                                </FormControl>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
-                    <FormField
-                        control={form.control}
-                        name='description'
-                        render={({ field }) => (
-                            <FormItem className='col-span-12 sm:col-span-6 lg:col-span-4'>
-                                <FormLabel>Policy Description</FormLabel>
-                                <FormControl>
-                                    <Input
-                                        placeholder='Description'
-                                        {...field}
-                                        value={field.value || undefined}
-                                    />
-                                </FormControl>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
+                    <FormGroup
+                        form={form}
+                        fieldName='name'
+                        label='Name'
+                        isRequired>
+                        <Input placeholder='Policy Name' />
+                    </FormGroup>
+
+                    <FormGroup
+                        form={form}
+                        fieldName='reasoning'
+                        label='Policy Reasoning'>
+                        <Input placeholder='Reasoning' />
+                    </FormGroup>
+
+                    <FormGroup
+                        form={form}
+                        fieldName='description'
+                        label='Policy Description'>
+                        <Input placeholder='Description' />
+                    </FormGroup>
                 </div>
 
                 <div className='grid grid-cols-12 gap-8'>
                     <H2 className='text-xl text-accent2 col-span-12'>
                         Policy Data
                     </H2>
-                    <FormField
-                        control={form.control}
-                        name='type'
-                        render={({ field }) => (
-                            <FormItem className='col-span-12 sm:col-span-6 lg:col-span-4'>
-                                <FormLabel>
-                                    Policy Type
-                                    <span className='text-red-600 italic bold ml-1'>
-                                        *
-                                    </span>
-                                </FormLabel>
+                    <ControlledFormGroup
+                        form={form}
+                        fieldName='type'
+                        label='Policy Type'
+                        defaultValue={policy.type}
+                        isRequired>
+                        <Select>
+                            <SelectTrigger>
+                                <SelectValue
+                                    placeholder='Policy Type'
+                                    className='text-neutral-600'
+                                />
+                            </SelectTrigger>
+                            <SelectContent>
+                                <SelectItem value='SECURITY'>
+                                    Security
+                                </SelectItem>
+                                <SelectItem value='LEGAL'>Legal</SelectItem>
+                                <SelectItem value='BREACH'>Breach</SelectItem>
+                                <SelectItem value='ACCESSIBILITY'>
+                                    Accessibility
+                                </SelectItem>
+                                <SelectItem value='PRIVACY'>Privacy</SelectItem>
+                            </SelectContent>
+                        </Select>
+                    </ControlledFormGroup>
 
-                                <Select
-                                    onValueChange={field.onChange}
-                                    defaultValue={policy.type}
-                                    {...field}>
-                                    <SelectTrigger>
-                                        <SelectValue
-                                            placeholder='Policy Type'
-                                            className='text-neutral-600'
-                                        />
-                                    </SelectTrigger>
-                                    <SelectContent>
-                                        <SelectItem value='SECURITY'>
-                                            Security
-                                        </SelectItem>
-                                        <SelectItem value='LEGAL'>
-                                            Legal
-                                        </SelectItem>
-                                        <SelectItem value='BREACH'>
-                                            Breach
-                                        </SelectItem>
-                                        <SelectItem value='ACCESSIBILITY'>
-                                            Accessibility
-                                        </SelectItem>
-                                        <SelectItem value='PRIVACY'>
-                                            Privacy
-                                        </SelectItem>
-                                    </SelectContent>
-                                </Select>
+                    <ControlledFormGroup
+                        form={form}
+                        fieldName='priority'
+                        label='Priority'
+                        defaultValue={policy.priority}
+                        isRequired>
+                        <Select>
+                            <SelectTrigger>
+                                <SelectValue
+                                    placeholder='Priority'
+                                    className='text-neutral-600'
+                                />
+                            </SelectTrigger>
+                            <SelectContent>
+                                <SelectItem
+                                    value='HIGH'
+                                    className='flex items-center'>
+                                    <div className='flex items-center gap-2'>
+                                        <div className='w-4 h-4 rounded-full bg-red-600'></div>
+                                        High
+                                    </div>
+                                </SelectItem>
+                                <SelectItem value='MEDIUM'>
+                                    <div className='flex items-center gap-2'>
+                                        <div className='w-4 h-4 rounded-full bg-yellow-400'></div>
+                                        Medium
+                                    </div>
+                                </SelectItem>
+                                <SelectItem value='LOW'>
+                                    <div className='flex items-center gap-2'>
+                                        <div className='w-4 h-4 rounded-full bg-green-500'></div>
+                                        Low
+                                    </div>
+                                </SelectItem>
+                            </SelectContent>
+                        </Select>
+                    </ControlledFormGroup>
 
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
-                    <FormField
-                        control={form.control}
-                        name='priority'
-                        render={({ field }) => (
-                            <FormItem className='col-span-12 sm:col-span-6 lg:col-span-4'>
-                                <FormLabel>
-                                    Priority
-                                    <span className='text-red-600 italic bold ml-1'>
-                                        *
-                                    </span>
-                                </FormLabel>
-
-                                <Select
-                                    onValueChange={field.onChange}
-                                    defaultValue={policy.priority}
-                                    {...field}>
-                                    <SelectTrigger>
-                                        <SelectValue
-                                            placeholder='Priority'
-                                            className='text-neutral-600'
-                                        />
-                                    </SelectTrigger>
-                                    <SelectContent>
-                                        <SelectItem
-                                            value='HIGH'
-                                            className='flex items-center'>
-                                            <div className='flex items-center gap-2'>
-                                                <div className='w-4 h-4 rounded-full bg-red-600'></div>
-                                                High
-                                            </div>
-                                        </SelectItem>
-                                        <SelectItem value='MEDIUM'>
-                                            <div className='flex items-center gap-2'>
-                                                <div className='w-4 h-4 rounded-full bg-yellow-400'></div>
-                                                Medium
-                                            </div>
-                                        </SelectItem>
-                                        <SelectItem value='LOW'>
-                                            <div className='flex items-center gap-2'>
-                                                <div className='w-4 h-4 rounded-full bg-green-500'></div>
-                                                Low
-                                            </div>
-                                        </SelectItem>
-                                    </SelectContent>
-                                </Select>
-
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
-                    <FormField
-                        control={form.control}
-                        name='status'
-                        render={({ field }) => (
-                            <FormItem className='col-span-12 sm:col-span-6 lg:col-span-4'>
-                                <FormLabel>
-                                    Status
-                                    <span className='text-red-600 italic bold ml-1'>
-                                        *
-                                    </span>
-                                </FormLabel>
-
-                                <Select
-                                    onValueChange={field.onChange}
-                                    defaultValue={policy.status}
-                                    {...field}>
-                                    <SelectTrigger>
-                                        <SelectValue
-                                            placeholder='Status'
-                                            className='text-neutral-600'
-                                        />
-                                    </SelectTrigger>
-                                    <SelectContent>
-                                        <SelectItem value='COMPLETE'>
-                                            Complete
-                                        </SelectItem>
-                                        <SelectItem value='DRAFT'>
-                                            Draft
-                                        </SelectItem>
-                                        <SelectItem value='TO_BE_DRAFTED'>
-                                            To Be Drafted
-                                        </SelectItem>
-                                        <SelectItem value='TBD'>TBD</SelectItem>
-                                        <SelectItem value='ARCHIVE'>
-                                            Archive
-                                        </SelectItem>
-                                    </SelectContent>
-                                </Select>
-
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
+                    <ControlledFormGroup
+                        form={form}
+                        fieldName='status'
+                        label='Status'
+                        defaultValue={policy.status}
+                        isRequired>
+                        <Select>
+                            <SelectTrigger>
+                                <SelectValue
+                                    placeholder='Status'
+                                    className='text-neutral-600'
+                                />
+                            </SelectTrigger>
+                            <SelectContent>
+                                <SelectItem value='COMPLETE'>
+                                    Complete
+                                </SelectItem>
+                                <SelectItem value='DRAFT'>Draft</SelectItem>
+                                <SelectItem value='TO_BE_DRAFTED'>
+                                    To Be Drafted
+                                </SelectItem>
+                                <SelectItem value='TBD'>TBD</SelectItem>
+                                <SelectItem value='ARCHIVE'>Archive</SelectItem>
+                            </SelectContent>
+                        </Select>
+                    </ControlledFormGroup>
                 </div>
 
                 <div className='grid grid-cols-12 gap-8'>

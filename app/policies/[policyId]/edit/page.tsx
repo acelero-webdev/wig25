@@ -19,11 +19,12 @@ export default async function EditPolicyPage({
                 id: parseInt(policyId),
             },
         });
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    } catch (error) {
-        throw new Error(
-            'There was an issue fetching this policy from the database.'
-        );
+    } catch (error: unknown) {
+        if (error instanceof Error) {
+            throw error;
+        } else {
+            throw new Error('Sorry, an known error occured.');
+        }
     }
 
     if (!policy) {

@@ -10,7 +10,7 @@ import {
 } from '@/components/ui/card';
 import Image, { StaticImageData } from 'next/image';
 import Link from 'next/link';
-import { Query } from '../page';
+import { Query } from '../../app/policies/page';
 
 interface InfoCardProps {
     title: string;
