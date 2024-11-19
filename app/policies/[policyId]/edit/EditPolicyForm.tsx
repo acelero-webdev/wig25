@@ -86,6 +86,13 @@ export default function EditPolicyForm({ policy }: { policy: Policy }) {
 
         const response = await editPolicyAction(formData, policy.id);
 
+        if (!response.ok) {
+            return toast.toast({
+                title: response.message,
+                variant: 'destructive',
+            });
+        }
+
         form.reset();
         toast.toast({
             title: response.message,

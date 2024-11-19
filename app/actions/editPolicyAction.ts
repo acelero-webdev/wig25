@@ -1,26 +1,24 @@
 'use server';
 import { policyFormSchema } from '@/lib/schemas/PolicySchema';
-import { Policy } from '@prisma/client';
+import { PolicyType, Priority, Status } from '@prisma/client';
 import { db } from '@/prisma/db';
 
 export type FormState = {
     message: string;
+    ok: boolean;
 };
 
 export async function editPolicyAction(
     data: FormData,
     policyId: number
 ): Promise<FormState> {
-    const formData: Policy = {
-        // @ts-expect-error - type is forced in select input.
-        type: data.get('type')?.toString(),
+    const formData = {
+        type: data.get('type')?.toString() as PolicyType,
         name: data.get('name')?.toString() ?? '',
         description: data.get('description')?.toString() || '',
-        // @ts-expect-error - type is forced in select input.
-        priority: data.get('priority')?.toString(),
+        priority: data.get('priority')?.toString() as Priority,
         reasoning: data.get('reasoning')?.toString() || '',
-        // @ts-expect-error - type is forced in select input.
-        status: data.get('status')?.toString(),
+        status: data.get('status')?.toString() as Status,
         businessScopes: JSON.parse(
             data.get('businessScopes')?.toString() || ''
         ),
@@ -41,23 +39,30 @@ export async function editPolicyAction(
     if (!validation.success) {
         return {
             message: 'Invalid form data.',
+            ok: false,
         };
     }
 
-    // try {
-    await db.policy.update({
-        where: {
-            id: policyId,
-        },
-        data: formData,
-    });
-    // } catch (error: Error) {
-    //     return {
-    //         message: error.message,
-    //     };
-    // }
+    try {
+        await db.policy.update({
+            where: {
+                id: policyId,
+            },
+            data: formData,
+        });
+    } catch (error: unknown) {
+        if (error instanceof Error) {
+            return {
+                message: error.message,
+                ok: false,
+            };
+        } else {
+            return { message: 'An unknown error occured.', ok: false };
+        }
+    }
 
     return {
-        message: 'Policy updated successfully.',
+        message: 'Policy Updated Successfully.',
+        ok: true,
     };
 }

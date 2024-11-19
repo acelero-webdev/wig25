@@ -45,11 +45,6 @@ export default function AddPolicyForm() {
     // 1. Define your form.
     const form = useForm<z.infer<typeof policyFormSchema>>({
         resolver: zodResolver(policyFormSchema),
-        defaultValues: {
-            name: '',
-            description: '',
-            reasoning: '',
-        },
     });
 
     // 2. Define a submit handler.
@@ -75,6 +70,13 @@ export default function AddPolicyForm() {
         );
 
         const response = await addPolicyAction(formData);
+
+        if (!response.ok) {
+            return toast.toast({
+                title: response.message,
+                variant: 'destructive',
+            });
+        }
 
         form.reset();
         toast.toast({
