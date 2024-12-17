@@ -2,7 +2,7 @@
 
 import { Input } from '@/components/ui/input';
 import { Search } from 'lucide-react';
-import React, { useState } from 'react';
+import React from 'react';
 
 interface SearchBarProps {
     search: string;
@@ -10,13 +10,8 @@ interface SearchBarProps {
 }
 
 export default function SearchBar({ search, setSearch }: SearchBarProps) {
-    const [searchIsActive, setSearchIsActive] = useState(false);
-
     return (
-        <div
-            className='w-full text-3xl text-black relative'
-            onMouseEnter={() => setSearchIsActive(true)}
-            onMouseLeave={() => setSearchIsActive(false)}>
+        <div className='w-full text-3xl text-black relative'>
             <Search className='absolute top-1/2 left-3 -translate-y-1/2' />
             <Input
                 onChange={(e) => setSearch(e.target.value)}

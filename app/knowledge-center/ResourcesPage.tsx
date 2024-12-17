@@ -13,7 +13,6 @@ interface ResourcesPageProps {
 
 export default function ResourcesPage({ defaultTags }: ResourcesPageProps) {
     const [search, setSearch] = useState('');
-    const [tags, setTags] = useState(defaultTags);
     const [selectedTags, setSelectedTags] = useState<Tag[]>([]);
 
     const { data: articles, error } = useSWR(
@@ -37,8 +36,6 @@ export default function ResourcesPage({ defaultTags }: ResourcesPageProps) {
         return <p>There was an error in your request.</p>;
     }
 
-    console.log(articles);
-
     return (
         <main className='flex flex-col gap-10 justify-center items-center h-[90%] p-8'>
             <SearchBar
@@ -46,8 +43,7 @@ export default function ResourcesPage({ defaultTags }: ResourcesPageProps) {
                 setSearch={setSearch}
             />
             <ArticleTags
-                tags={tags}
-                setTags={setTags}
+                tags={defaultTags}
                 selectedTags={selectedTags}
                 setSelectedTags={setSelectedTags}
             />

@@ -7,14 +7,12 @@ import ArticleTag from './ArticleTag';
 
 interface PopularTagsProps {
     tags: Tag[];
-    setTags: React.Dispatch<React.SetStateAction<Tag[]>>;
     selectedTags: Tag[];
     setSelectedTags: React.Dispatch<React.SetStateAction<Tag[]>>;
 }
 
 export default function ArticleTags({
     tags,
-    setTags,
     selectedTags,
     setSelectedTags,
 }: PopularTagsProps) {

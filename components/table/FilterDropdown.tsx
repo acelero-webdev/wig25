@@ -58,7 +58,7 @@ export default function FilterDropdown({
 
     useEffect(() => {
         setOptionsState(initialState);
-    }, [columnFilters]);
+    }, [initialState, columnFilters]);
 
     return (
         <DropdownMenu>
