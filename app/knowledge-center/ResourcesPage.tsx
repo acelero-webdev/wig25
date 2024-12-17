@@ -4,12 +4,16 @@ import React, { useState } from 'react';
 import ArticlesGrid from './ArticlesGrid';
 import ArticleTags from './ArticleTags';
 import SearchBar from './SearchBar';
-import { Tag } from '@prisma/client';
+import { Article, Tag } from '@prisma/client';
 import useSWR from 'swr';
 
 interface ResourcesPageProps {
     defaultTags: Tag[];
 }
+
+export type ArticleWithTag = Article & {
+    tags: Tag[];
+};
 
 export default function ResourcesPage({ defaultTags }: ResourcesPageProps) {
     const [search, setSearch] = useState('');
@@ -17,7 +21,7 @@ export default function ResourcesPage({ defaultTags }: ResourcesPageProps) {
 
     const { data: articles, error } = useSWR(
         ['/api/articles', selectedTags],
-        async ([url, selectedTags]) => {
+        async ([url, selectedTags]): Promise<ArticleWithTag[]> => {
             const tagQuery = selectedTags.map((tag) => tag.id).toString();
             const res = await fetch(
                 `http://localhost:3000${url}${

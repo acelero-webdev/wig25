@@ -5,14 +5,10 @@ import {
     CardDescription,
     CardTitle,
 } from '@/components/ui/card';
-import { Article, Tag } from '@prisma/client';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
-
-type ArticleWithTag = Article & {
-    tags: Tag[];
-};
+import { ArticleWithTag } from './ResourcesPage';
 
 export default function ArticleCard({ article }: { article: ArticleWithTag }) {
     return (

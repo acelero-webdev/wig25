@@ -1,9 +1,13 @@
 import { H2 } from '@/components/typography/h2';
-import { Article } from '@prisma/client';
 import React from 'react';
 import ArticleCard from './ArticleCard';
+import { ArticleWithTag } from './ResourcesPage';
 
-export default function ArticlesGrid({ articles }: { articles: Article[] }) {
+export default function ArticlesGrid({
+    articles,
+}: {
+    articles: ArticleWithTag[];
+}) {
     return (
         <div className='flex flex-col w-full'>
             <H2 className='text-2xl font-semibold mb-4 text-primary'>
