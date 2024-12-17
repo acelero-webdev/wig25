@@ -18,7 +18,7 @@ export type ArticleWithTag = Article & {
 const host =
     process.env.NODE_ENV === 'production'
         ? 'https://wig.shanekobylecky.tech'
-        : 'http:localhost:3000';
+        : 'http://localhost:3000';
 
 export default function ResourcesPage({ defaultTags }: ResourcesPageProps) {
     const [search, setSearch] = useState('');

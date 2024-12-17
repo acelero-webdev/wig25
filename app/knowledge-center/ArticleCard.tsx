@@ -11,6 +11,11 @@ import React from 'react';
 import { ArticleWithTag } from './ResourcesPage';
 
 export default function ArticleCard({ article }: { article: ArticleWithTag }) {
+    const host =
+        process.env.NODE_ENV === 'production'
+            ? 'https://wig.shanekobylecky.tech'
+            : undefined;
+
     return (
         <Card className='col-span-4 h-full'>
             <CardContent className='p-4 flex flex-col gap-3 justify-end h-full'>
@@ -34,7 +39,11 @@ export default function ArticleCard({ article }: { article: ArticleWithTag }) {
                 </CardDescription>
 
                 <Image
-                    src={article.imageURL}
+                    src={`${
+                        host
+                            ? `${host}/${article.imageURL}`
+                            : `${article.imageURL}`
+                    }`}
                     alt='article image'
                     width={800}
                     className='h-40 bg-cover'
