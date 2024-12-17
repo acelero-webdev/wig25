@@ -13,10 +13,10 @@ export default function ErrorPage({
     return (
         <main className='flex justify-center items-center min-h-[90%]'>
             <div className='h-fit space-y-4'>
-                <h1 className='text-5xl text-accent font-bold text-center'>
+                <h1 className='text-5xl text-primary font-bold text-center'>
                     Oops, we ran into an error.
                 </h1>
-                <p className='text-xl font-bold text-center text-accent2'>
+                <p className='text-xl font-bold text-center text-primary2'>
                     {error.message ||
                         'An unknown error occured please try again.'}
                 </p>
@@ -24,7 +24,7 @@ export default function ErrorPage({
                     <Link
                         href='/'
                         className='text-center'>
-                        <Button className='bg-accent text-white hover:bg-white hover:text-accent'>
+                        <Button className='bg-accent text-white hover:bg-white hover:text-primary'>
                             <HomeIcon />
                             Return Home
                         </Button>

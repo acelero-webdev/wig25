@@ -38,10 +38,10 @@ export default async function ViewPolicyPage({
     }
 
     return (
-        <main className='text-accent space-y-10 px-5'>
+        <main className='text-primary space-y-10 px-5'>
             <section className='flex flex-row gap-2 justify-between items-start px-2'>
                 <div>
-                    <h1 className='text-4xl font-bold text-accent'>
+                    <h1 className='text-4xl font-bold text-primary'>
                         {policy.name}
                     </h1>
                     {policy.description && (
@@ -52,7 +52,7 @@ export default async function ViewPolicyPage({
                 </div>
                 <div className='flex flex-row gap-2'>
                     <Link href={`/policies/${policy.id}/edit`}>
-                        <Button className='bg-accent text-white hover:bg-white hover:text-accent font-sans'>
+                        <Button className='bg-accent text-white hover:bg-white hover:text-primary font-sans'>
                             <Pencil />
                             Edit
                         </Button>

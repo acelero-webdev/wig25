@@ -38,7 +38,7 @@ export default function InfoCard({
     return (
         <Card className={`font-sans max-w-[400px] mx-auto ${className}`}>
             <CardHeader>
-                <CardTitle className='text-center text-xl text-accent2'>
+                <CardTitle className='text-center text-xl text-primary2'>
                     {title}
                 </CardTitle>
                 <CardDescription className='text-center sm:text-left'>
@@ -67,7 +67,7 @@ export default function InfoCard({
                         pathname: link,
                         query,
                     }}
-                    className='text-center text-accent font-bold block w-full'>
+                    className='text-center text-primary font-bold block w-full'>
                     View Policies
                 </Link>
             </CardFooter>

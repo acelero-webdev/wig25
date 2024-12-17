@@ -29,7 +29,7 @@ export default function FilterChips({
     return (
         <nav className='flex flex-row gap-4 flex-wrap'>
             {globalFilter && globalFilter !== '' && (
-                <div className='flex flex-row justify-center items-center px-3 py-2 gap-2 bg-white text-accent rounded-xl'>
+                <div className='flex flex-row justify-center items-center px-3 py-2 gap-2 bg-white text-primary rounded-xl'>
                     <p className='font-sans font-bold text-[14px] bg-accent text-white rounded-2xl px-4'>
                         search
                     </p>

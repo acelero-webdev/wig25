@@ -16,7 +16,7 @@ export default function SecurityPage() {
     return (
         <main className='flex flex-col gap-10 items-center h-[90%] mb-3 px-8 sm:px-8'>
             <section className='flex flex-col items-center gap-4'>
-                <H1 className='text-accent text-3xl mb-0 font-extrabold md:text-5xl'>
+                <H1 className='text-secondary text-3xl mb-0 font-extrabold md:text-5xl'>
                     Security Package
                 </H1>
                 <P className='w-full text-accent2 font-bold text-md sm:text-lg md:text-xl md:w-2/3 text-center'>
@@ -25,13 +25,13 @@ export default function SecurityPage() {
                     to a secure and resilient work environment.
                 </P>
                 <Link href='/policies'>
-                    <Button className='bg-accent font-sans hover:bg-white hover:text-accent'>
+                    <Button className='bg-accent2 text-white font-sans hover:bg-white hover:text-secondary'>
                         View All Policies
                     </Button>
                 </Link>
             </section>
             <section className='space-y-8'>
-                <H2 className='text-2xl md:text-3xl text-accent text-center'>
+                <H2 className='text-2xl md:text-3xl text-secondary text-center'>
                     Select a framework to find out more.
                 </H2>
                 <div className='grid grid-cols-12 gap-8'>

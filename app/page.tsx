@@ -9,14 +9,14 @@ export default function Home() {
     return (
         <main className='flex flex-col-reverse gap-10 items-center justify-center h-[90%] p-4 min-[900px]:flex-row'>
             <div className='w-full space-y-3 mx-3 text-center md:w-1/2 min-[900px]:text-left'>
-                <H1 className='text-accent text-5xl font-extrabold min-[900px]:text-6xl'>
+                <H1 className='text-primary text-5xl font-extrabold min-[900px]:text-6xl'>
                     2025 IT WIG
                 </H1>
                 <P className='text-accent font-bold text-lg'>
                     We will move from working procedures to key network-wide IT
                     privacy and security policies by EOY.
                 </P>
-                <P className='text-accent2 font-bold text-xl'>
+                <P className='text-accent font-bold text-xl'>
                     Finance Team, IT Team
                 </P>
             </div>

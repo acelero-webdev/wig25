@@ -34,7 +34,7 @@ export default async function EditPolicyPage({
     return (
         <main className='bg-white p-8 rounded-xl mx-4'>
             <div className='flex flex-row justify-between items-start'>
-                <h1 className='text-accent text-3xl mb-4 font-extrabold md:text-4xl'>
+                <h1 className='text-primary text-3xl mb-4 font-extrabold md:text-4xl'>
                     {policy.name}
                 </h1>
                 <Link href={`/policies/${policy.id}/view`}>

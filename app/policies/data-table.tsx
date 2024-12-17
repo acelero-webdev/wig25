@@ -199,7 +199,7 @@ export function DataTable<TData extends Policy, TValue>({
                     </Button>
                     <div className='sm:self-end sm:ml-auto'>
                         <Link href='/policies/add'>
-                            <Button className='bg-accent text-[10px] sm:text-sm font-sans hover:bg-white hover:text-accent'>
+                            <Button className='bg-accent text-[10px] sm:text-sm font-sans hover:bg-white hover:text-primary'>
                                 <PlusCircle /> New Policy
                             </Button>
                         </Link>
@@ -222,7 +222,7 @@ export function DataTable<TData extends Policy, TValue>({
                                 return (
                                     <TableHead
                                         key={header.id}
-                                        className='text-accent'>
+                                        className='text-primary'>
                                         {header.isPlaceholder
                                             ? null
                                             : flexRender(

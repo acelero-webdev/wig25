@@ -9,7 +9,7 @@ export default function NavLinks() {
 
     return (
         <div className='flex flex-row justify-between w-full'>
-            <div className='text-accent font-normal text-xl'>
+            <div className='text-primary font-normal text-xl'>
                 <Link href='/'>
                     <li
                         className={`hover:font-bold ${
@@ -19,7 +19,18 @@ export default function NavLinks() {
                     </li>
                 </Link>
             </div>
-            <div className='flex flex-row gap-8 text-accent font-normal text-xl'>
+            <div className='flex flex-row gap-8 text-primary font-normal text-xl'>
+                <Link href='/knowledge-center'>
+                    <li
+                        className={`hover:font-bold ${
+                            pathname.startsWith('/knowledge-center')
+                                ? 'font-bold'
+                                : ''
+                        }`}>
+                        Knowledge Center
+                    </li>
+                </Link>
+
                 <Link href='/security'>
                     <li
                         className={`hover:font-bold ${

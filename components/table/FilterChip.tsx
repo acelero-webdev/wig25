@@ -38,7 +38,7 @@ export default function FilterChip({
     }
 
     return (
-        <div className='flex flex-row flex-wrap justify-center items-center px-3 py-2 gap-2 bg-white text-accent rounded-xl'>
+        <div className='flex flex-row flex-wrap justify-center items-center px-3 py-2 gap-2 bg-white text-primary rounded-xl'>
             {values && (
                 <>
                     <p className='font-sans font-bold text-[14px] bg-accent text-white rounded-2xl px-4'>
@@ -48,7 +48,7 @@ export default function FilterChip({
             )}
             {values.map((value: string) => (
                 <div
-                    className='flex flex-row gap-2 items-center justify-center mx-2 bg-neutral-200 px-3 text-accent rounded-xl'
+                    className='flex flex-row gap-2 items-center justify-center mx-2 bg-neutral-200 px-3 text-primary rounded-xl'
                     key={value}>
                     <p className='font-sans text-[14px] font-bold'>
                         {properCase(value)}

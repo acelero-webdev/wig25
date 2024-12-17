@@ -105,7 +105,7 @@ export default function EditPolicyForm({ policy }: { policy: Policy }) {
                 className='text-neutral-600 space-y-8 font-sans text-sm'
                 autoComplete='off'>
                 <div className='grid gap-8 grid-cols-12'>
-                    <H2 className='text-xl text-accent2 col-span-12'>
+                    <H2 className='text-xl text-primary2 col-span-12'>
                         Policy Info
                     </H2>
                     <FormGroup
@@ -132,7 +132,7 @@ export default function EditPolicyForm({ policy }: { policy: Policy }) {
                 </div>
 
                 <div className='grid grid-cols-12 gap-8'>
-                    <H2 className='text-xl text-accent2 col-span-12'>
+                    <H2 className='text-xl text-primary2 col-span-12'>
                         Policy Data
                     </H2>
                     <ControlledFormGroup
@@ -229,7 +229,7 @@ export default function EditPolicyForm({ policy }: { policy: Policy }) {
                 </div>
 
                 <div className='grid grid-cols-12 gap-8'>
-                    <H2 className='text-xl text-accent2 col-span-12'>
+                    <H2 className='text-xl text-primary2 col-span-12'>
                         Policy Meta
                     </H2>
                     <div className='col-span-12 sm:col-span-6 lg:col-span-4'>
@@ -347,7 +347,7 @@ export default function EditPolicyForm({ policy }: { policy: Policy }) {
                 <Button
                     type='submit'
                     disabled={!form.formState.isDirty}
-                    className='col-span-12 mt-10 bg-accent hover:bg-white hover:text-accent hover:border-2 hover:border-accent'>
+                    className='col-span-12 mt-10 bg-accent hover:bg-white hover:text-primary hover:border-2 hover:border-accent'>
                     Update
                 </Button>
             </form>

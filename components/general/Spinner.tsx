@@ -13,7 +13,7 @@ export default function Spinner({ message }: { message?: string }) {
                     aria-label='Loading Spinner'
                     data-testid='loader'
                 />
-                <P className='text-accent text-xl'>
+                <P className='text-primary text-xl'>
                     {message || 'Fetching your data from the database.'}
                 </P>
             </div>

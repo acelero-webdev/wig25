@@ -32,10 +32,10 @@ export default async function PoliciesPage({
         <main className='space-y-6 px-8'>
             <div className='text-center space-y-6 flex flex-col'>
                 <div className='text-left'>
-                    <H2 className='text-2xl md:text-3xl text-accent'>
+                    <H2 className='text-2xl md:text-3xl text-primary'>
                         Policy Table
                     </H2>
-                    <P className='text-accent2 font-bold text-lg'>
+                    <P className='text-primary2 font-bold text-lg'>
                         Find the policy you need quickly.
                     </P>
                 </div>

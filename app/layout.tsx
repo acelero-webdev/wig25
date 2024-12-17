@@ -30,7 +30,7 @@ export default function RootLayout({
     return (
         <html lang='en'>
             <body
-                className={`${anybody.variable} ${inter.variable} antialiased bg-secondary`}>
+                className={`${anybody.variable} ${inter.variable} antialiased bg-background`}>
                 <div className='max-w-[1200px] mx-auto h-screen'>
                     <Nav />
                     {children}
