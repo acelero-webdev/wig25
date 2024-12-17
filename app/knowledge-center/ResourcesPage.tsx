@@ -15,6 +15,11 @@ export type ArticleWithTag = Article & {
     tags: Tag[];
 };
 
+const host =
+    process.env.NODE_ENV === 'production'
+        ? 'https://wig.shanekobylecky.tech'
+        : 'http:localhost:3000';
+
 export default function ResourcesPage({ defaultTags }: ResourcesPageProps) {
     const [search, setSearch] = useState('');
     const [selectedTags, setSelectedTags] = useState<Tag[]>([]);
@@ -24,7 +29,7 @@ export default function ResourcesPage({ defaultTags }: ResourcesPageProps) {
         async ([url, selectedTags]): Promise<ArticleWithTag[]> => {
             const tagQuery = selectedTags.map((tag) => tag.id).toString();
             const res = await fetch(
-                `http://localhost:3000${url}${
+                `${host}${url}${
                     selectedTags.length !== 0 ? `?selectedTags=${tagQuery}` : ''
                 }`,
                 {
